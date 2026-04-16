@@ -1,7 +1,7 @@
 {
   "info": {
     "title": "区块链技术考试题库",
-    "totalChoice": 173,
+    "totalChoice": 174,
     "totalJudgment": 36
   },
   "choiceQuestions": [
@@ -1759,7 +1759,19 @@
       "options": [
         {
           "key": "A",
-          "text": "激励作用 B、决策能力 C、规范行为 D、遵纪守法"
+          "text": "激励作用"
+        },
+        {
+          "key": "B",
+          "text": "决策能力"
+        },
+        {
+          "key": "C",
+          "text": "规范行为"
+        },
+        {
+          "key": "D",
+          "text": "遵纪守法"
         }
       ],
       "answer": "B"
@@ -1770,72 +1782,163 @@
       "options": [
         {
           "key": "A",
-          "text": "法律具有规范人们行为规范的作用 B、法律具有协调人与人之间关系的作用"
+          "text": "法律具有规范人们行为规范的作用"
+        },
+        {
+          "key": "B",
+          "text": "法律具有协调人与人之间关系的作用"
         },
         {
           "key": "C",
-          "text": "违法犯罪的人都逃不脱法律的制裁 D、法律具有裁决违法犯罪行为的作用"
+          "text": "违法犯罪的人都逃不脱法律的制裁"
+        },
+        {
+          "key": "D",
+          "text": "法律具有裁决违法犯罪行为的作用"
         }
       ],
       "answer": "C"
     },
     {
       "id": 79,
+      "question": "比特币区块链采用的共识算法是( )。",
+      "options": [
+        {
+          "key": "A",
+          "text": "PoS"
+        },
+        {
+          "key": "B",
+          "text": "PoW"
+        },
+        {
+          "key": "C",
+          "text": "DPoS"
+        },
+        {
+          "key": "D",
+          "text": "PBFT"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 80,
       "question": "需求获取整理和分析后，获得的文档包括用例说明文档和( )。",
       "options": [
         {
           "key": "A",
-          "text": "前景和范围文档 B、需求说明书 C、系统分析说明书 D、系统操作手册"
-        }
-      ],
-      "answer": "A"
-    },
-    {
-      "id": 80,
-      "question": "在使用PoW共识机制的区块链网络中，由恶意节点控制超过50%算力所发起的攻",
-      "options": [
+          "text": "前景和范围文档"
+        },
         {
-          "key": "A",
-          "text": "51%攻击 B、半数攻击 C、双花攻击 D、超算攻击"
+          "key": "B",
+          "text": "需求说明书"
+        },
+        {
+          "key": "C",
+          "text": "系统分析说明书"
+        },
+        {
+          "key": "D",
+          "text": "系统操作"
         }
       ],
       "answer": "A"
     },
     {
       "id": 81,
-      "question": "区块链的安全性主要是通过( )来运行保证的。",
+      "question": "在使用PoW共识机制的区块链网络中，由恶意节点控制超过50%算力所发起的攻",
       "options": [
         {
           "key": "A",
-          "text": "签名算法 B、密码学算法 C、哈希算法 D、共识算法"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 82,
-      "question": "拜占庭将军问题解决了那些问题( )。",
-      "options": [
+          "text": "51%攻击"
+        },
         {
-          "key": "A",
-          "text": "分布式通讯 B、共识机制 C、内容加密 D、领土纠纷"
+          "key": "B",
+          "text": "半数攻击"
+        },
+        {
+          "key": "C",
+          "text": "双花攻击"
+        },
+        {
+          "key": "D",
+          "text": "超算攻击"
         }
       ],
       "answer": "A"
     },
     {
+      "id": 82,
+      "question": "区块链的安全性主要是通过( )来运行保证的。",
+      "options": [
+        {
+          "key": "A",
+          "text": "签名算法"
+        },
+        {
+          "key": "B",
+          "text": "密码学算法"
+        },
+        {
+          "key": "C",
+          "text": "哈希算法"
+        },
+        {
+          "key": "D",
+          "text": "共识算法"
+        }
+      ],
+      "answer": "B"
+    },
+    {
       "id": 83,
+      "question": "拜占庭将军问题解决了那些问题( )。",
+      "options": [
+        {
+          "key": "A",
+          "text": "分布式通讯"
+        },
+        {
+          "key": "B",
+          "text": "共识机制"
+        },
+        {
+          "key": "C",
+          "text": "内容加密"
+        },
+        {
+          "key": "D",
+          "text": "领土纠纷"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 84,
       "question": "根据《中华人民共和国密码法》，核心密码、普通密码用于保护国家秘密信息,核",
       "options": [
         {
           "key": "A",
-          "text": "机密级，绝密级 B、机密级，秘密级 C、绝密级，机密级 D、绝密级，秘密级"
+          "text": "机密级，绝密级"
+        },
+        {
+          "key": "B",
+          "text": "机密级，秘密级"
+        },
+        {
+          "key": "C",
+          "text": "绝密级，机密级"
+        },
+        {
+          "key": "D",
+          "text": "绝密级，"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 84,
+      "id": 85,
       "question": "在安装新的APP时，弹窗提示隐私政策后，最简易的做法是( )。",
       "options": [
         {
@@ -1858,18 +1961,30 @@
       "answer": "C"
     },
     {
-      "id": 85,
+      "id": 86,
       "question": "《中华人民共和国数据安全法》规定，维护数据安全，应当坚持( )观，建立健",
       "options": [
         {
           "key": "A",
-          "text": "总体国家安全 B、个人安全 C、劳动安全 D、消防安全"
+          "text": "总体国家安全"
+        },
+        {
+          "key": "B",
+          "text": "个人安全"
+        },
+        {
+          "key": "C",
+          "text": "劳动安全"
+        },
+        {
+          "key": "D",
+          "text": "消防安全"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 86,
+      "id": 87,
       "question": "调查问卷中，问题排列的先后顺序通常是( )。",
       "options": [
         {
@@ -1892,133 +2007,237 @@
       "answer": "D"
     },
     {
-      "id": 87,
+      "id": 88,
       "question": "客户访谈计划，是与客户约定( )。",
       "options": [
         {
           "key": "A",
-          "text": "访谈地点 B、访谈费用"
+          "text": "访谈地点"
+        },
+        {
+          "key": "B",
+          "text": "访谈费用"
         },
         {
           "key": "C",
-          "text": "访谈用途 D、访谈时间和议题"
+          "text": "访谈用途"
+        },
+        {
+          "key": "D",
+          "text": "访谈时间和议题"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 88,
+      "id": 89,
       "question": "( )属于总体需求调研内容。",
       "options": [
         {
           "key": "A",
-          "text": "业务数据 B、业务流程 C、组织结构 D、业务功能"
-        }
-      ],
-      "answer": "C"
-    },
-    {
-      "id": 89,
-      "question": "不通过向被调研对象进行提问，而将人们的与调研主题相关的活动记录下来的方法",
-      "options": [
+          "text": "业务数据"
+        },
         {
-          "key": "A",
-          "text": "询问法 B、小组访谈法 C、观察法 D、试验法"
+          "key": "B",
+          "text": "业务流程"
+        },
+        {
+          "key": "C",
+          "text": "组织结构"
+        },
+        {
+          "key": "D",
+          "text": "业务功能"
         }
       ],
       "answer": "C"
     },
     {
       "id": 90,
-      "question": "区块链应用场景功能的确定方法不包含( )。",
+      "question": "不通过向被调研对象进行提问，而将人们的与调研主题相关的活动记录下来的方法",
       "options": [
         {
           "key": "A",
-          "text": "数据设计 B、系统结构设计 C、接口设计 D、过程设计"
+          "text": "询问法"
+        },
+        {
+          "key": "B",
+          "text": "小组访谈法"
+        },
+        {
+          "key": "C",
+          "text": "观察法"
+        },
+        {
+          "key": "D",
+          "text": "试验法"
         }
       ],
       "answer": "C"
     },
     {
       "id": 91,
+      "question": "区块链应用场景功能的确定方法不包含( )。",
+      "options": [
+        {
+          "key": "A",
+          "text": "数据设计"
+        },
+        {
+          "key": "B",
+          "text": "系统结构设计"
+        },
+        {
+          "key": "C",
+          "text": "接口设计"
+        },
+        {
+          "key": "D",
+          "text": "过程设计"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 92,
       "question": "一般使用( )软件用于编制流程图。",
       "options": [
         {
           "key": "A",
-          "text": "MS-VISIO B、MS-PROJECT C、EXCEL D、WORD"
+          "text": "MS-VISIO"
+        },
+        {
+          "key": "B",
+          "text": "MS-PROJECT"
+        },
+        {
+          "key": "C",
+          "text": "EXCEL"
+        },
+        {
+          "key": "D",
+          "text": "WORD"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 92,
+      "id": 93,
       "question": "功能结构图表示的是功能的( )。",
       "options": [
         {
           "key": "A",
-          "text": "层次关系 B、从属关系"
+          "text": "层次关系"
+        },
+        {
+          "key": "B",
+          "text": "从属关系"
         },
         {
           "key": "C",
-          "text": "分布关系 D、模块之间的关系"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 93,
-      "question": "在项目结束时，( )不会在项目文档中归档。",
-      "options": [
-        {
-          "key": "A",
-          "text": "项目计划基准和后续变更 B、沟通计划和更新"
+          "text": "分布关系"
         },
         {
-          "key": "C",
-          "text": "财务记录 D、每个项目组成员的绩效评估"
+          "key": "D",
+          "text": "模块之间的关系"
         }
       ],
       "answer": "B"
     },
     {
       "id": 94,
+      "question": "在项目结束时，( )不会在项目文档中归档。",
+      "options": [
+        {
+          "key": "A",
+          "text": "项目计划基准和后续变更"
+        },
+        {
+          "key": "B",
+          "text": "沟通计划和更新"
+        },
+        {
+          "key": "C",
+          "text": "财务记录"
+        },
+        {
+          "key": "D",
+          "text": "每个项目组成员的绩效评估"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 95,
       "question": "下面不是软件需求规格说明书的特点的是( )。",
       "options": [
         {
           "key": "A",
-          "text": "正确性 B、无歧义性 C、完整性 D、不可修改性"
+          "text": "正确性"
+        },
+        {
+          "key": "B",
+          "text": "无歧义性"
+        },
+        {
+          "key": "C",
+          "text": "完整性"
+        },
+        {
+          "key": "D",
+          "text": "不可修改"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 95,
+      "id": 96,
       "question": "在软件需求分析过程中，分析员要从用户那里解决的最重要问题是( )。",
       "options": [
         {
           "key": "A",
-          "text": "要求软件做什么 B、要给软件提供哪些信息"
+          "text": "要求软件做什么"
+        },
+        {
+          "key": "B",
+          "text": "要给软件提供哪些信息"
         },
         {
           "key": "C",
-          "text": "要求软件工作效率如何 D、要求软件具有什么样的结构"
+          "text": "要求软件工作效率如何"
+        },
+        {
+          "key": "D",
+          "text": "要求软件具有什么样的结构"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 96,
+      "id": 97,
       "question": "下列不属于测试用例设计原则的是( )。",
       "options": [
         {
           "key": "A",
-          "text": "完备性 B、正确性 C、局部性 D、可操作性"
+          "text": "完备性"
+        },
+        {
+          "key": "B",
+          "text": "正确性"
+        },
+        {
+          "key": "C",
+          "text": "局部性"
+        },
+        {
+          "key": "D",
+          "text": "可操作性"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 97,
+      "id": 98,
       "question": "下面关于测试用例的说法错误的是( )。",
       "options": [
         {
@@ -2041,33 +2260,53 @@
       "answer": "B"
     },
     {
-      "id": 98,
+      "id": 99,
       "question": "测试用例中产生( )的操作属于测试用例的输入。",
       "options": [
         {
           "key": "A",
-          "text": "测试日志 B、测试条件 C、实测结果 D、预期结果"
+          "text": "测试日志"
+        },
+        {
+          "key": "B",
+          "text": "测试条件"
+        },
+        {
+          "key": "C",
+          "text": "实测结果"
+        },
+        {
+          "key": "D",
+          "text": "预期结果"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 99,
+      "id": 100,
       "question": "在CentOS系统上，可以用方式( )去安装git。",
       "options": [
         {
           "key": "A",
-          "text": "yum-yinstallgit B、apt-getinstallgit"
+          "text": "yum-yinstallgit"
+        },
+        {
+          "key": "B",
+          "text": "apt-getinstallgit"
         },
         {
           "key": "C",
-          "text": "rpm-ivhgit D、servicecreategit"
+          "text": "rpm-ivhgit"
+        },
+        {
+          "key": "D",
+          "text": "servicecreategit"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 100,
+      "id": 101,
       "question": "以下关于MySQL配置向导的说法中错误的是( )。",
       "options": [
         {
@@ -2090,163 +2329,283 @@
       "answer": "A"
     },
     {
-      "id": 101,
+      "id": 102,
       "question": "部署区块链系统之前，应根据( )来规划网络服务端口。",
       "options": [
         {
           "key": "A",
-          "text": "测试计划 B、端口规划方案 C、部署方案 D、用户手册"
+          "text": "测试计划"
+        },
+        {
+          "key": "B",
+          "text": "端口规划方案"
+        },
+        {
+          "key": "C",
+          "text": "部署方案"
+        },
+        {
+          "key": "D",
+          "text": "用户手册"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 102,
+      "id": 103,
       "question": "登录验证测试属于( )。",
       "options": [
         {
           "key": "A",
-          "text": "安全性测试 B、兼容性测试"
+          "text": "安全性测试"
+        },
+        {
+          "key": "B",
+          "text": "兼容性测试"
         },
         {
           "key": "C",
-          "text": "功能测试 D、系统兼容性测试"
+          "text": "功能测试"
+        },
+        {
+          "key": "D",
+          "text": "系统兼容性测试"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 103,
+      "id": 104,
       "question": "回归测试的目的是( )。",
       "options": [
         {
           "key": "A",
-          "text": "验证修改的成功 B、预防功能编写的不完善或疏漏"
+          "text": "验证修改的成功"
+        },
+        {
+          "key": "B",
+          "text": "预防功能编写的不完善或疏漏"
         },
         {
           "key": "C",
-          "text": "确保修正过程中没有引入新的缺陷 D、帮助程序员更好地进行单元测试"
+          "text": "确保修正过程中没有引入新的缺陷"
+        },
+        {
+          "key": "D",
+          "text": "帮助程序员更好地进行单元测试"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 104,
+      "id": 105,
       "question": "为了确保网络测试精确和结果收集，需要使用( )工具来完成性能指标。",
       "options": [
         {
           "key": "A",
-          "text": "手动测试 B、自动维护 C、手动维护 D、自动测试"
+          "text": "手动测试"
+        },
+        {
+          "key": "B",
+          "text": "自动维护"
+        },
+        {
+          "key": "C",
+          "text": "手动维护"
+        },
+        {
+          "key": "D",
+          "text": "自动测试"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 105,
+      "id": 106,
       "question": "可视化可以将难以理解的原始数据变换成用户可以理解的模式和特征，并显示出",
       "options": [
         {
           "key": "A",
-          "text": "数据采集 B、数据分析 C、数据处理和变换 D、用户感知"
+          "text": "数据采集"
+        },
+        {
+          "key": "B",
+          "text": "数据分析"
+        },
+        {
+          "key": "C",
+          "text": "数据处理和变换"
+        },
+        {
+          "key": "D",
+          "text": "用户感知"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 106,
+      "id": 107,
       "question": "项目团队中，规划数据指标体系的角色是( )。",
       "options": [
         {
           "key": "A",
-          "text": "产品经理 B、开发工程师 C、项目经理 D、测试工程师"
+          "text": "产品经理"
+        },
+        {
+          "key": "B",
+          "text": "开发工程师"
+        },
+        {
+          "key": "C",
+          "text": "项目经理"
+        },
+        {
+          "key": "D",
+          "text": "测试工程"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 107,
+      "id": 108,
       "question": "在以太坊网络中，要想查看处于pending状态的交易列表，应使用( )方法。",
       "options": [
         {
           "key": "A",
-          "text": "getPending B、getPendingTransactionsbyHash"
+          "text": "getPending"
+        },
+        {
+          "key": "B",
+          "text": "getPendingTransactionsbyHash"
         },
         {
           "key": "C",
-          "text": "getPendingTransactions D、getTransactions"
+          "text": "getPendingTransactions"
+        },
+        {
+          "key": "D",
+          "text": "getTransactions"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 108,
+      "id": 109,
       "question": "方法getTransactionCount的作用是( )。",
       "options": [
         {
           "key": "A",
-          "text": "某地址接收的交易次数 B、某地址发送的交易次数"
+          "text": "某地址接收的交易次数"
+        },
+        {
+          "key": "B",
+          "text": "某地址发送的交易次数"
         },
         {
           "key": "C",
-          "text": "某区块包括的交易数量 D、某交易执行的次数"
+          "text": "某区块包括的交易数量"
+        },
+        {
+          "key": "D",
+          "text": "某交易执行的次数"
         }
       ],
       "answer": "B"
     },
     {
-      "id": 109,
+      "id": 110,
       "question": "在以太坊通过智能合约内部账户余额查询，每个地址都有一个( )账户余额属性。",
       "options": [
         {
           "key": "A",
-          "text": "balance B、craft C、gost D、post"
+          "text": "balance"
+        },
+        {
+          "key": "B",
+          "text": "craft"
+        },
+        {
+          "key": "C",
+          "text": "gost"
+        },
+        {
+          "key": "D",
+          "text": "post"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 110,
+      "id": 111,
       "question": "在geth控制台中，查询某一账户余额的命令是( )。",
       "options": [
         {
           "key": "A",
-          "text": "eth.getcode B、eth.getBalance"
+          "text": "eth.getcode"
+        },
+        {
+          "key": "B",
+          "text": "eth.getBalance"
         },
         {
           "key": "C",
-          "text": "eth.getAcount D、eth.getBlock"
+          "text": "eth.getAcount"
+        },
+        {
+          "key": "D",
+          "text": "eth.getBlock"
         }
       ],
       "answer": "B"
     },
     {
-      "id": 111,
+      "id": 112,
       "question": "在Linux平台下，查看CPU、内存状态的命令是( )。",
       "options": [
         {
           "key": "A",
-          "text": "top B、showenvironment"
+          "text": "top"
+        },
+        {
+          "key": "B",
+          "text": "showenvironment"
         },
         {
           "key": "C",
-          "text": "lscpu D、sysnmon"
+          "text": "lscpu"
+        },
+        {
+          "key": "D",
+          "text": "sysnmon"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 112,
+      "id": 113,
       "question": "下列存储管理方式中，存储碎片尽可能少，使内存利用率较高的是( )。",
       "options": [
         {
           "key": "A",
-          "text": "固定分区 B、可变分区 C、分页管理 D、段页式管理"
+          "text": "固定分区"
+        },
+        {
+          "key": "B",
+          "text": "可变分区"
+        },
+        {
+          "key": "C",
+          "text": "分页管理"
+        },
+        {
+          "key": "D",
+          "text": "段页式管理"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 113,
+      "id": 114,
       "question": "以下关于网络流量监控的叙述中，不正确的是( )。",
       "options": [
         {
@@ -2269,200 +2628,352 @@
       "answer": "A"
     },
     {
-      "id": 114,
+      "id": 115,
       "question": "在内存管理诸模式中,内存利用率最高的是( )模式",
       "options": [
         {
           "key": "A",
-          "text": "分区管理 B、分页管理 C、分段管理 D、段页式管理"
+          "text": "分区管理"
+        },
+        {
+          "key": "B",
+          "text": "分页管理"
+        },
+        {
+          "key": "C",
+          "text": "分段管理"
+        },
+        {
+          "key": "D",
+          "text": "段页式管理"
         }
       ],
       "answer": "B"
     },
     {
-      "id": 115,
+      "id": 116,
       "question": "( )是指只访问了入口页面（例如网站首页）就离开的访问量与所产生总访问量",
       "options": [
         {
           "key": "A",
-          "text": "IP B、UV C、跳出率 D、PV"
+          "text": "IP"
+        },
+        {
+          "key": "B",
+          "text": "UV"
+        },
+        {
+          "key": "C",
+          "text": "跳出率"
+        },
+        {
+          "key": "D",
+          "text": "PV"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 116,
+      "id": 117,
       "question": "要查看在指定地址部署的编译后的智能合约代码，正确的以太坊接口命令是( )。",
       "options": [
         {
           "key": "A",
-          "text": "eth_getCode B、eth_getContact C、eth_getBlock D、eth_getPrice"
+          "text": "eth_getCode"
+        },
+        {
+          "key": "B",
+          "text": "eth_getContact"
+        },
+        {
+          "key": "C",
+          "text": "eth_getBlock"
+        },
+        {
+          "key": "D",
+          "text": "eth_getPrice"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 117,
+      "id": 118,
       "question": "智能合约的工作顺序是( )。",
       "options": [
         {
           "key": "A",
-          "text": "执行-存储-构建 B、构建-执行-存储 C、构建-存储-执行 D、存储-构建执行"
+          "text": "执行-存储-构建"
+        },
+        {
+          "key": "B",
+          "text": "构建-执行-存储"
+        },
+        {
+          "key": "C",
+          "text": "构建-存储-执行"
+        },
+        {
+          "key": "D",
+          "text": "存储-构建执"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 118,
+      "id": 119,
       "question": "当使用命令行的Geth来同步以太坊区块链时，可使用web3.js中的( )属性来",
       "options": [
         {
           "key": "A",
-          "text": "web3.eth.getSyncing B、web3.eth.getstate"
+          "text": "web3.eth.getSyncing"
+        },
+        {
+          "key": "B",
+          "text": "web3.eth.getstate"
         },
         {
           "key": "C",
-          "text": "web3.eth.isMining D、web3.eth.isSyncing"
+          "text": "web3.eth.isMining"
+        },
+        {
+          "key": "D",
+          "text": "web3.eth.isSyncing"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 119,
+      "id": 120,
       "question": "以太坊的日志内容属于( )的一部分。",
       "options": [
         {
           "key": "A",
-          "text": "交易信息 B、交易收据 C、区块体 D、合约状态信息"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 120,
-      "question": "以太坊中每笔交易的区块确认数大于等于( )的时候，则表明这笔交易是不可逆",
-      "options": [
+          "text": "交易信息"
+        },
         {
-          "key": "A",
-          "text": "4 B、6 C、8 D、10"
+          "key": "B",
+          "text": "交易收据"
+        },
+        {
+          "key": "C",
+          "text": "区块体"
+        },
+        {
+          "key": "D",
+          "text": "合约状态"
         }
       ],
       "answer": "B"
     },
     {
       "id": 121,
+      "question": "以太坊中每笔交易的区块确认数大于等于( )的时候，则表明这笔交易是不可逆",
+      "options": [
+        {
+          "key": "A",
+          "text": "4"
+        },
+        {
+          "key": "B",
+          "text": "6"
+        },
+        {
+          "key": "C",
+          "text": "8"
+        },
+        {
+          "key": "D",
+          "text": "10"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 122,
       "question": "职业素养中的“愿”指的是（）。",
       "options": [
         {
           "key": "A",
-          "text": "心态 B、专业技能 C、沟通能力 D、时间管理能力"
-        }
-      ],
-      "answer": "A"
-    },
-    {
-      "id": 122,
-      "question": "（）不属于社会主义职业道德的基本要求。",
-      "options": [
+          "text": "心态"
+        },
         {
-          "key": "A",
-          "text": "勤俭节约、增创效益 B、讲究信誉、真诚守信"
+          "key": "B",
+          "text": "专业技能"
         },
         {
           "key": "C",
-          "text": "尽职尽责、服务群众 D、忠于职守、爱岗敬业"
+          "text": "沟通能力"
+        },
+        {
+          "key": "D",
+          "text": "时间管理能力"
         }
       ],
       "answer": "A"
     },
     {
       "id": 123,
+      "question": "（）不属于社会主义职业道德的基本要求。",
+      "options": [
+        {
+          "key": "A",
+          "text": "勤俭节约、增创效益"
+        },
+        {
+          "key": "B",
+          "text": "讲究信誉、真诚守信"
+        },
+        {
+          "key": "C",
+          "text": "尽职尽责、服务群众"
+        },
+        {
+          "key": "D",
+          "text": "忠于职守、爱岗敬业"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 124,
       "question": "企业职工具有良好的职业道德,可以使企业（）。",
       "options": [
         {
           "key": "A",
-          "text": "促进决策科学化 B、增强员工独立意识"
+          "text": "促进决策科学化"
+        },
+        {
+          "key": "B",
+          "text": "增强员工独立意识"
         },
         {
           "key": "C",
-          "text": "模糊企业上级与员工关系 D、提高产品和服务质量"
+          "text": "模糊企业上级与员工关系"
+        },
+        {
+          "key": "D",
+          "text": "提高产品和服务质量"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 124,
+      "id": 125,
       "question": "下列对“天网恢恢，疏而不漏”的理解正确的是（）。",
       "options": [
         {
           "key": "A",
-          "text": "法律具有规范人们行为规范的作用 B、法律具有协调人与人之间关系的作用"
+          "text": "法律具有规范人们行为规范的作用"
+        },
+        {
+          "key": "B",
+          "text": "法律具有协调人与人之间关系的作用"
         },
         {
           "key": "C",
-          "text": "违法犯罪的人都逃不脱法律的制裁 D、法律具有裁决违法犯罪行为的作用"
+          "text": "违法犯罪的人都逃不脱法律的制裁"
+        },
+        {
+          "key": "D",
+          "text": "法律具有裁决违法犯罪行为的作用"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 125,
+      "id": 126,
       "question": "（）是社会主义职业道德最重要的体现，也是从业人员最基本的职业道德要",
       "options": [
         {
           "key": "A",
-          "text": "爱岗敬业 B、遵纪守法 C、举止文明 D、办事公道"
-        }
-      ],
-      "answer": "A"
-    },
-    {
-      "id": 126,
-      "question": "计算机软件一般分为（）。",
-      "options": [
+          "text": "爱岗敬业"
+        },
         {
-          "key": "A",
-          "text": "系统软件和应用软件 B、操作系统和计算机语言"
+          "key": "B",
+          "text": "遵纪守法"
         },
         {
           "key": "C",
-          "text": "程序和数据"
+          "text": "举止文明"
+        },
+        {
+          "key": "D",
+          "text": "办事公道"
         }
       ],
       "answer": "A"
     },
+{
+  "id": 127,
+  "question": "计算机软件一般分为（）。",
+  "options": [
     {
-      "id": 127,
+      "key": "A",
+      "text": "系统软件和应用软件"
+    },
+    {
+      "key": "B",
+      "text": "操作系统和计算机语言"
+    },
+    {
+      "key": "C",
+      "text": "程序和数据"
+    },
+    {
+      "key": "D",
+      "text": "Windows"
+    }
+  ],
+  "answer": "A"
+},
+{
+  "id": 128,
       "question": "TCP/IP把网络通信分为五层，属于应用层的是（）。",
       "options": [
         {
           "key": "A",
-          "text": "IP（Internet协议） B、TCP（传输控制协议）"
+          "text": "IP（Internet协议）"
+        },
+        {
+          "key": "B",
+          "text": "TCP（传输控制协议）"
         },
         {
           "key": "C",
-          "text": "NFS（网络文件系统） D、UDP（用户数据协议）"
+          "text": "NFS（网络文件系统）"
+        },
+        {
+          "key": "D",
+          "text": "UDP（用户数据协议）"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 128,
+      "id": 129,
       "question": "《劳动法》与《劳动争议调解仲裁法》实施后，形成的现行劳动争议处理制度的",
       "options": [
         {
           "key": "A",
-          "text": "调解协商仲裁诉讼 B、协商调解仲裁诉讼"
+          "text": "调解协商仲裁诉讼"
+        },
+        {
+          "key": "B",
+          "text": "协商调解仲裁诉讼"
         },
         {
           "key": "C",
-          "text": "协商调解诉讼仲裁 D、协商诉讼仲裁调解"
+          "text": "协商调解诉讼仲裁"
+        },
+        {
+          "key": "D",
+          "text": "协商诉讼仲裁调解"
         }
       ],
       "answer": "B"
     },
     {
-      "id": 129,
+      "id": 130,
       "question": "根据《劳动合同法》，下列情形中，用人单位不得与劳动者解除劳动合同的是（）。",
       "options": [
         {
@@ -2485,7 +2996,7 @@
       "answer": "B"
     },
     {
-      "id": 130,
+      "id": 131,
       "question": "《网络安全法》第二十一条规定:网络运营者应当按照网络安全等级保护制度的要",
       "options": [
         {
@@ -2508,81 +3019,145 @@
       "answer": "B"
     },
     {
-      "id": 131,
+      "id": 132,
       "question": "业务流程图比较适用于反映（）处理类型的业务过程。",
       "options": [
         {
           "key": "A",
-          "text": "数据 B、系统 C、事务 D、功能"
+          "text": "数据"
+        },
+        {
+          "key": "B",
+          "text": "系统"
+        },
+        {
+          "key": "C",
+          "text": "事务"
+        },
+        {
+          "key": "D",
+          "text": "功能"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 132,
+      "id": 133,
       "question": "数据字典中，一般不出现的条目是（）。",
       "options": [
         {
           "key": "A",
-          "text": "数据流 B、数据存储 C、加工 D、源点与终点"
+          "text": "数据流"
+        },
+        {
+          "key": "B",
+          "text": "数据存储"
+        },
+        {
+          "key": "C",
+          "text": "加工"
+        },
+        {
+          "key": "D",
+          "text": "源点与终点"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 133,
+      "id": 134,
       "question": "在软件需求分析过程中，分析员要从用户那里解决的最重要问题是（）。",
       "options": [
         {
           "key": "A",
-          "text": "要求软件做什么 B、要给软件提供哪些信息"
+          "text": "要求软件做什么"
+        },
+        {
+          "key": "B",
+          "text": "要给软件提供哪些信息"
         },
         {
           "key": "C",
-          "text": "要求软件工作效率如何 D、要求软件具有什么样的结构"
+          "text": "要求软件工作效率如何"
+        },
+        {
+          "key": "D",
+          "text": "要求软件具有什么样的结构"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 134,
+      "id": 135,
       "question": "测试计划中，（）主要定义测试什么和验证什么。",
       "options": [
         {
           "key": "A",
-          "text": "需求项 B、测试策略 C、测试项 D、测试规则"
-        }
-      ],
-      "answer": "C"
-    },
-    {
-      "id": 135,
-      "question": "下列不属于测试用例设计原则的是（）。",
-      "options": [
+          "text": "需求项"
+        },
         {
-          "key": "A",
-          "text": "完备性 B、正确性 C、局部性 D、可操作性"
+          "key": "B",
+          "text": "测试策略"
+        },
+        {
+          "key": "C",
+          "text": "测试项"
+        },
+        {
+          "key": "D",
+          "text": "测试规则"
         }
       ],
       "answer": "C"
     },
     {
       "id": 136,
+      "question": "下列不属于测试用例设计原则的是（）。",
+      "options": [
+        {
+          "key": "A",
+          "text": "完备性"
+        },
+        {
+          "key": "B",
+          "text": "正确性"
+        },
+        {
+          "key": "C",
+          "text": "局部性"
+        },
+        {
+          "key": "D",
+          "text": "可操作性"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 137,
       "question": "下列属于功能测试点的是（）。",
       "options": [
         {
           "key": "A",
-          "text": "登陆->登录 B、输入用户名密码验证码登录成功"
+          "text": "登陆->登录"
+        },
+        {
+          "key": "B",
+          "text": "输入用户名密码验证码登录成功"
         },
         {
           "key": "C",
-          "text": "登录密码没有加密 D、登录有点慢"
+          "text": "登录密码没有加密"
+        },
+        {
+          "key": "D",
+          "text": "登录有点慢"
         }
       ],
       "answer": "B"
     },
     {
-      "id": 137,
+      "id": 138,
       "question": "下面关于测试用例的说法错误的是（）。",
       "options": [
         {
@@ -2605,40 +3180,76 @@
       "answer": "B"
     },
     {
-      "id": 138,
+      "id": 139,
       "question": "Fabric安装完毕后，安装路径下包含多个子目录，其中存放用于组织内部的区块",
       "options": [
         {
           "key": "A",
-          "text": "peer B、orderer C、msp D、gossip"
+          "text": "peer"
+        },
+        {
+          "key": "B",
+          "text": "orderer"
+        },
+        {
+          "key": "C",
+          "text": "msp"
+        },
+        {
+          "key": "D",
+          "text": "gossip"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 139,
+      "id": 140,
       "question": "部署Fabric系统的过程中需要构建（），它是Fabric网络上的私有区块链，",
       "options": [
         {
           "key": "A",
-          "text": "区块 B、通道 C、节点 D、组织"
+          "text": "区块"
+        },
+        {
+          "key": "B",
+          "text": "通道"
+        },
+        {
+          "key": "C",
+          "text": "节点"
+        },
+        {
+          "key": "D",
+          "text": "组织"
         }
       ],
       "answer": "B"
     },
     {
-      "id": 140,
+      "id": 141,
       "question": "数据备份的策略主要有全备份、差分备份、增量备份和（）。",
       "options": [
         {
           "key": "A",
-          "text": "软件备份 B、人工备份 C、备份介质轮换 D、双机容错"
+          "text": "软件备份"
+        },
+        {
+          "key": "B",
+          "text": "人工备份"
+        },
+        {
+          "key": "C",
+          "text": "备份介质轮换"
+        },
+        {
+          "key": "D",
+          "text": "双机容错"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 141,
+      "id": 142,
       "question": "关于如何安装Jmeter，以下说法正确的是（）。",
       "options": [
         {
@@ -2661,40 +3272,76 @@
       "answer": "C"
     },
     {
-      "id": 142,
+      "id": 143,
       "question": "单元测试一般由开发人员在编码阶段完成，因而单元测试通常采用的测试方法",
       "options": [
         {
           "key": "A",
-          "text": "黑盒测试方法 B、静态分析方法 C、动态测试方法 D、白盒测试方法"
+          "text": "黑盒测试方法"
+        },
+        {
+          "key": "B",
+          "text": "静态分析方法"
+        },
+        {
+          "key": "C",
+          "text": "动态测试方法"
+        },
+        {
+          "key": "D",
+          "text": "白盒测试方法"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 143,
+      "id": 144,
       "question": "集成测试计划通常是在软件概要设计阶段完成，集成测试一般采用（）测试",
       "options": [
         {
           "key": "A",
-          "text": "白盒法 B、黑盒法 C、静态分析 D、动态分析"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 144,
-      "question": "在软件测试中，验收测试主要用于发现（）阶段的错误。",
-      "options": [
+          "text": "白盒法"
+        },
         {
-          "key": "A",
-          "text": "软件计划 B、需求分析 C、软件设计 D、编码"
+          "key": "B",
+          "text": "黑盒法"
+        },
+        {
+          "key": "C",
+          "text": "静态分析"
+        },
+        {
+          "key": "D",
+          "text": "动态分析"
         }
       ],
       "answer": "B"
     },
     {
       "id": 145,
+      "question": "在软件测试中，验收测试主要用于发现（）阶段的错误。",
+      "options": [
+        {
+          "key": "A",
+          "text": "软件计划"
+        },
+        {
+          "key": "B",
+          "text": "需求分析"
+        },
+        {
+          "key": "C",
+          "text": "软件设计"
+        },
+        {
+          "key": "D",
+          "text": "编码"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 146,
       "question": "基于JUnit框架执行单元测试时（）。",
       "options": [
         {
@@ -2717,133 +3364,237 @@
       "answer": "D"
     },
     {
-      "id": 146,
+      "id": 147,
       "question": "软件的集成测试工作最好由（）承担，以提高集成测试的效果。",
       "options": [
         {
           "key": "A",
-          "text": "该软件的设计人员 B、该软件开发组的负责人"
+          "text": "该软件的设计人员"
+        },
+        {
+          "key": "B",
+          "text": "该软件开发组的负责人"
         },
         {
           "key": "C",
-          "text": "该软件的编程人员 D、不属于该软件开发组的软件设计人员"
+          "text": "该软件的编程人员"
+        },
+        {
+          "key": "D",
+          "text": "不属于该软件开发组的软件设计人员"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 147,
+      "id": 148,
       "question": "在执行系统测试过程中，测试人员最主要依据（）来设计测试用例。",
       "options": [
         {
           "key": "A",
-          "text": "需求分析说明书 B、概要设计说明书"
+          "text": "需求分析说明书"
+        },
+        {
+          "key": "B",
+          "text": "概要设计说明书"
         },
         {
           "key": "C",
-          "text": "详细设计说明书 D、系统规格说明书"
+          "text": "详细设计说明书"
+        },
+        {
+          "key": "D",
+          "text": "系统规格说明书"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 148,
+      "id": 149,
       "question": "验收测试用例执行包括使用适当的（）执行测试用例。",
       "options": [
         {
           "key": "A",
-          "text": "输出值 B、输入值 C、特定值 D、边界值"
+          "text": "输出值"
+        },
+        {
+          "key": "B",
+          "text": "输入值"
+        },
+        {
+          "key": "C",
+          "text": "特定值"
+        },
+        {
+          "key": "D",
+          "text": "边界值"
         }
       ],
       "answer": "B"
     },
     {
-      "id": 149,
+      "id": 150,
       "question": "数据指标的组成要素不包括（）。",
       "options": [
         {
           "key": "A",
-          "text": "维度 B、汇总方式 C、量度 D、广度"
+          "text": "维度"
+        },
+        {
+          "key": "B",
+          "text": "汇总方式"
+        },
+        {
+          "key": "C",
+          "text": "量度"
+        },
+        {
+          "key": "D",
+          "text": "广度"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 150,
+      "id": 151,
       "question": "准确性是指若允许某些数据不准确或者丢失时，用户接受的概率是多少，通常用",
       "options": [
         {
           "key": "A",
-          "text": "正确率 B、错误率 C、命中率 D、接受率"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 151,
-      "question": "区块链的性能测试指标包括交易确认时间、单方交易TPS、故障恢复时间和（）。",
-      "options": [
+          "text": "正确率"
+        },
         {
-          "key": "A",
-          "text": "交易失败率 B、哈希函数的计算速率"
+          "key": "B",
+          "text": "错误率"
         },
         {
           "key": "C",
-          "text": "单个用户的日交易量 D、故障产生率"
+          "text": "命中率"
+        },
+        {
+          "key": "D",
+          "text": "接受率"
         }
       ],
       "answer": "B"
     },
     {
       "id": 152,
-      "question": "如果有两个事务，同时对数据库中同一数据进行操作，不可能引起冲突的操作是",
+      "question": "区块链的性能测试指标包括交易确认时间、单方交易TPS、故障恢复时间和（）。",
       "options": [
         {
           "key": "A",
-          "text": "其中有一个是DELETE B、一个是SELECT，另一个是UPDATE"
+          "text": "交易失败率"
+        },
+        {
+          "key": "B",
+          "text": "哈希函数的计算速率"
         },
         {
           "key": "C",
-          "text": "两个都是SELECT D、两个都是UPDATE"
-        }
-      ],
-      "answer": "C"
-    },
-    {
-      "id": 153,
-      "question": "以太坊节点监控工具ethstats采用（）模式。",
-      "options": [
+          "text": "单个用户的日交易量"
+        },
         {
-          "key": "A",
-          "text": "C/S B、B/S C、D/S D、P2P"
-        }
-      ],
-      "answer": "A"
-    },
-    {
-      "id": 154,
-      "question": "用户构成指标不包括（）。",
-      "options": [
-        {
-          "key": "A",
-          "text": "性别 B、职业 C、外貌 D、喜好"
-        }
-      ],
-      "answer": "C"
-    },
-    {
-      "id": 155,
-      "question": "留存率=新增用户中登陆用户数/（）*100%",
-      "options": [
-        {
-          "key": "A",
-          "text": "用户总数 B、新增用户数 C、未登录用户数 D、流失用户数"
+          "key": "D",
+          "text": "故障产生率"
         }
       ],
       "answer": "B"
     },
     {
+      "id": 153,
+      "question": "如果有两个事务，同时对数据库中同一数据进行操作，不可能引起冲突的操作是",
+      "options": [
+        {
+          "key": "A",
+          "text": "其中有一个是DELETE"
+        },
+        {
+          "key": "B",
+          "text": "一个是SELECT，另一个是UPDATE"
+        },
+        {
+          "key": "C",
+          "text": "两个都是SELECT"
+        },
+        {
+          "key": "D",
+          "text": "两个都是UPDATE"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 154,
+      "question": "以太坊节点监控工具ethstats采用（）模式。",
+      "options": [
+        {
+          "key": "A",
+          "text": "C/S"
+        },
+        {
+          "key": "B",
+          "text": "B/S"
+        },
+        {
+          "key": "C",
+          "text": "D/S"
+        },
+        {
+          "key": "D",
+          "text": "P2P"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 155,
+      "question": "用户构成指标不包括（）。",
+      "options": [
+        {
+          "key": "A",
+          "text": "性别"
+        },
+        {
+          "key": "B",
+          "text": "职业"
+        },
+        {
+          "key": "C",
+          "text": "外貌"
+        },
+        {
+          "key": "D",
+          "text": "喜好"
+        }
+      ],
+      "answer": "C"
+    },
+    {
       "id": 156,
+      "question": "留存率=新增用户中登陆用户数/（）*100%",
+      "options": [
+        {
+          "key": "A",
+          "text": "用户总数"
+        },
+        {
+          "key": "B",
+          "text": "新增用户数"
+        },
+        {
+          "key": "C",
+          "text": "未登录用户数"
+        },
+        {
+          "key": "D",
+          "text": "流失用户数"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 157,
       "question": "Geth客户端eth.blockNumber命令的功能是（）。",
       "options": [
         {
@@ -2866,119 +3617,191 @@
       "answer": "B"
     },
     {
-      "id": 157,
+      "id": 158,
       "question": "若要配置Fabric区块中包含的交易数量，应对文件（）进行修改。",
       "options": [
         {
           "key": "A",
-          "text": "config.yaml B、configtx.proto"
+          "text": "config.yaml"
+        },
+        {
+          "key": "B",
+          "text": "configtx.proto"
         },
         {
           "key": "C",
-          "text": "configtx.yaml D、configblock.yaml"
+          "text": "configtx.yaml"
+        },
+        {
+          "key": "D",
+          "text": "configblock.yaml"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 158,
+      "id": 159,
       "question": "进入Fabric命令行容器的命令是（）。",
       "options": [
         {
           "key": "A",
-          "text": "dockerexec-itclibash B、dockerexec-itcli"
+          "text": "dockerexec-itclibash"
+        },
+        {
+          "key": "B",
+          "text": "dockerexec-itcli"
         },
         {
           "key": "C",
-          "text": "docker-itclibash D、docker-composeexec-itclibash"
+          "text": "docker-itclibash"
+        },
+        {
+          "key": "D",
+          "text": "docker-composeexec-itclibash"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 159,
+      "id": 160,
       "question": "对默克尔树进行检索的理论复杂度为（）。",
       "options": [
         {
           "key": "A",
-          "text": "线性阶 B、对数阶 C、平方阶 D、立方阶"
+          "text": "线性阶"
+        },
+        {
+          "key": "B",
+          "text": "对数阶"
+        },
+        {
+          "key": "C",
+          "text": "平方阶"
+        },
+        {
+          "key": "D",
+          "text": "立方阶"
         }
       ],
       "answer": "B"
     },
     {
-      "id": 160,
+      "id": 161,
       "question": "已知区块的哈希值，可以调用客户端的（）方法获得区块的内容。",
       "options": [
         {
           "key": "A",
-          "text": "Number B、GetBlockbyTime"
+          "text": "Number"
+        },
+        {
+          "key": "B",
+          "text": "GetBlockbyTime"
         },
         {
           "key": "C",
-          "text": "GetBlockbyheight D、GetBlockbyHash"
+          "text": "GetBlockbyheight"
+        },
+        {
+          "key": "D",
+          "text": "GetBlockbyHash"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 161,
+      "id": 162,
       "question": "打开比特币区块链浏览器，把时间切换到（）年1月3日，就可以查看到比",
       "options": [
         {
           "key": "A",
-          "text": "2007 B、2008 C、2009 D、2010"
-        }
-      ],
-      "answer": "C"
-    },
-    {
-      "id": 162,
-      "question": "使用（）命令，可以获得当前channel上区块链的高度信息。",
-      "options": [
+          "text": "2007"
+        },
         {
-          "key": "A",
-          "text": "channelheight B、channellength"
+          "key": "B",
+          "text": "2008"
         },
         {
           "key": "C",
-          "text": "channelgetinfo D、channelgetHeight"
+          "text": "2009"
+        },
+        {
+          "key": "D",
+          "text": "2010"
         }
       ],
       "answer": "C"
     },
     {
       "id": 163,
+      "question": "使用（）命令，可以获得当前channel上区块链的高度信息。",
+      "options": [
+        {
+          "key": "A",
+          "text": "channelheight"
+        },
+        {
+          "key": "B",
+          "text": "channellength"
+        },
+        {
+          "key": "C",
+          "text": "channelgetinfo"
+        },
+        {
+          "key": "D",
+          "text": "channelgetHeight"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 164,
       "question": "方法eth_getTransactionByHash的作用是（）。",
       "options": [
         {
           "key": "A",
-          "text": "返回指定哈希的区块信息 B、返回指定哈希的交易信息"
+          "text": "返回指定哈希的区块信息"
+        },
+        {
+          "key": "B",
+          "text": "返回指定哈希的交易信息"
         },
         {
           "key": "C",
-          "text": "返回指定区块内的交易 D、返回指定区块的哈希值"
+          "text": "返回指定区块内的交易"
+        },
+        {
+          "key": "D",
+          "text": "返回指定区块的哈希值"
         }
       ],
       "answer": "B"
     },
     {
-      "id": 164,
+      "id": 165,
       "question": "Geth客户端命令eth_getUncleCountByBlockNumber的作用是（）。",
       "options": [
         {
           "key": "A",
-          "text": "返回指定块的叔块数量 B、返回指定块的叔块信息"
+          "text": "返回指定块的叔块数量"
+        },
+        {
+          "key": "B",
+          "text": "返回指定块的叔块信息"
         },
         {
           "key": "C",
-          "text": "返回指定块的叔块编号 D、返回指定块的叔块哈希"
+          "text": "返回指定块的叔块编号"
+        },
+        {
+          "key": "D",
+          "text": "返回指定块的叔块哈希"
         }
       ],
       "answer": "A"
     },
     {
-      "id": 165,
+      "id": 166,
       "question": "在保障区块链公链如比特币上账户的隐私方面，下列说法中（）)是正确的。",
       "options": [
         {
@@ -3001,44 +3824,76 @@
       "answer": "B"
     },
     {
-      "id": 166,
+      "id": 167,
       "question": "区块链中运用了（）技术来实现隐私保护。",
       "options": [
         {
           "key": "A",
-          "text": "哈希算法 B、数字签名"
+          "text": "哈希算法"
+        },
+        {
+          "key": "B",
+          "text": "数字签名"
         },
         {
           "key": "C",
-          "text": "参与者可拥有多个公钥 D、公开密钥技术"
+          "text": "参与者可拥有多个公钥"
+        },
+        {
+          "key": "D",
+          "text": "公开密钥技术"
         }
       ],
       "answer": "D"
     },
     {
-      "id": 167,
+      "id": 168,
       "question": "应用程序接口服务和区块链节点需要通过（）方法进行通信。",
       "options": [
         {
           "key": "A",
-          "text": "P2P B、RPC C、UDP D、TCP"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 168,
-      "question": "在以太坊中使用solc编译智能合约，会得到（）)代码。",
-      "options": [
+          "text": "P2P"
+        },
         {
-          "key": "A",
-          "text": "十进制 B、二进制 C、十六进制 D、八进制"
+          "key": "B",
+          "text": "RPC"
+        },
+        {
+          "key": "C",
+          "text": "UDP"
+        },
+        {
+          "key": "D",
+          "text": "TCP"
         }
       ],
       "answer": "B"
     },
     {
       "id": 169,
+      "question": "在以太坊中使用solc编译智能合约，会得到（）)代码。",
+      "options": [
+        {
+          "key": "A",
+          "text": "十进制"
+        },
+        {
+          "key": "B",
+          "text": "二进制"
+        },
+        {
+          "key": "C",
+          "text": "十六进制"
+        },
+        {
+          "key": "D",
+          "text": "八进制"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 170,
       "question": "关于智能合约部署，以下说法不正确的是（）。",
       "options": [
         {
@@ -3061,29 +3916,53 @@
       "answer": "D"
     },
     {
-      "id": 170,
+      "id": 171,
       "question": "将合约代码转化成运行环境可执行的格式,并部署到区块链网络节点的过程称为",
       "options": [
         {
           "key": "A",
-          "text": "合约创建 B、编译部署 C、合约执行 D、合约触发"
+          "text": "合约创建"
+        },
+        {
+          "key": "B",
+          "text": "编译部署"
+        },
+        {
+          "key": "C",
+          "text": "合约执行"
+        },
+        {
+          "key": "D",
+          "text": "合约触发"
         }
       ],
       "answer": "B"
     },
     {
-      "id": 171,
+      "id": 172,
       "question": "区块链系统的基本运维指标不包括（）。",
       "options": [
         {
           "key": "A",
-          "text": "节点状态 B、节点区块高度 C、网络吞吐量 D、节点共识状态"
+          "text": "节点状态"
+        },
+        {
+          "key": "B",
+          "text": "节点区块高度"
+        },
+        {
+          "key": "C",
+          "text": "网络吞吐量"
+        },
+        {
+          "key": "D",
+          "text": "节点共识状"
         }
       ],
       "answer": "C"
     },
     {
-      "id": 172,
+      "id": 173,
       "question": "下面关于区块链监控工具安装的描述，错误的是（）。",
       "options": [
         {
@@ -3106,16 +3985,24 @@
       "answer": "C"
     },
     {
-      "id": 173,
+      "id": 174,
       "question": "云监控平台的监控功能非常丰富，但是云监控平台无法监控（）。",
       "options": [
         {
           "key": "A",
-          "text": "操作系统监控 B、基础监控"
+          "text": "操作系统监控"
+        },
+        {
+          "key": "B",
+          "text": "基础监控"
         },
         {
           "key": "C",
-          "text": "进程监控 D、区块链网络监控"
+          "text": "进程监控"
+        },
+        {
+          "key": "D",
+          "text": "区块链网络监控"
         }
       ],
       "answer": "D"
@@ -3159,7 +4046,7 @@
     },
     {
       "id": 8,
-      "question": "区块的头部结构由固定长度的字段组成，例如4字节和80字节的字段，分别代表不同的数据信息。",
+      "question": "区块的头部结构由固定长度的字段组成，例如4字节和80字节的字段，分别代",
       "answer": true
     },
     {
@@ -3174,12 +4061,12 @@
     },
     {
       "id": 11,
-      "question": "Keepalived不仅可以结合LVS实现高可用，也能与MySQL等数据库服务配合使用。",
+      "question": "Keepalived不仅可以结合LVS实现高可用，也能与MySQL等数据库服务配合",
       "answer": false
     },
     {
       "id": 12,
-      "question": "区块链3.0阶段的应用已扩展至金融领域之外，如法律、医疗等场景，通过去中心化解决信任问题。",
+      "question": "区块链3.0阶段的应用已扩展至金融领域之外，如法律、医疗等场景，通过去",
       "answer": true
     },
     {
@@ -3194,12 +4081,12 @@
     },
     {
       "id": 15,
-      "question": "实用拜占庭容错（PBFT）算法将传统拜占庭协议的复杂度从指数级优化为多项式级。",
+      "question": "实用拜占庭容错（PBFT）算法将传统拜占庭协议的复杂度从指数级优化为多项",
       "answer": true
     },
     {
       "id": 16,
-      "question": "区块链1.0阶段以比特币为代表，聚焦数字货币；2.0阶段以太坊引入智能合约支持DApp开发；3.0阶段则推动区块链技术在各行业的场景化落地。",
+      "question": "区块链1.0阶段以比特币为代表，聚焦数字货币；2.0阶段以太坊引入智能合约",
       "answer": true
     },
     {
@@ -3214,12 +4101,12 @@
     },
     {
       "id": 19,
-      "question": "商业秘密是指不为公众所知的，能为权利人带来经济利益，具有实用性并经权利人采取保密措施的技术信息和经营信息。",
+      "question": "商业秘密是指不为公众所知的，能为权利人带来经济利益，具有实用性",
       "answer": true
     },
     {
       "id": 20,
-      "question": "2008年中本聪建立了一个开放源代码项目（opensourceproject），正式宣告了比特币的诞生。",
+      "question": "2008年中本聪建立了一个开放源代码项目（opensourceproject），正",
       "answer": false
     },
     {
@@ -3249,7 +4136,7 @@
     },
     {
       "id": 26,
-      "question": "α测试是由一个用户在开发环境下进行的测试，也可以是公司内部的用户在模拟实际操作环境下进行的测试。",
+      "question": "α测试是由一个用户在开发环境下进行的测试，也可以是公司内部的用",
       "answer": true
     },
     {
@@ -3259,7 +4146,7 @@
     },
     {
       "id": 28,
-      "question": "Visio帮助创建具有专业外观的表格，以便理解、记录和分析信息、数据、系统和过程。",
+      "question": "Visio帮助创建具有专业外观的表格，以便理解、记录和分析信息、数据、",
       "answer": false
     },
     {
@@ -3269,17 +4156,17 @@
     },
     {
       "id": 30,
-      "question": "软件测试环境贯穿了测试的各个阶段，每个测试阶段中环境对测试的影响不同。",
+      "question": "软件测试环境贯穿了测试的各个阶段，每个测试阶段中环境对测试的影响",
       "answer": true
     },
     {
       "id": 31,
-      "question": "安装Loadrunner之后进行验证操作是为了确保指定的目录、设备名称都正确，并具有足够的磁盘空间。",
+      "question": "安装Loadrunner之后进行验证操作是为了确保指定的目录、设备名称都正",
       "answer": true
     },
     {
       "id": 32,
-      "question": "系统测试是将软件系统与硬件、外设和网络等其他因素结合，对整个软件系统进行测试。",
+      "question": "系统测试是将软件系统与硬件、外设和网络等其他因素结合，对整个软件",
       "answer": true
     },
     {
@@ -3289,12 +4176,12 @@
     },
     {
       "id": 34,
-      "question": "区块链应用部署信息表不能完全清晰的告诉运维人员或开发人员该系统的各项重要信息。",
+      "question": "区块链应用部署信息表不能完全清晰的告诉运维人员或开发人员该系统的",
       "answer": false
     },
     {
       "id": 35,
-      "question": "区块链管理工具安装前，需要查看安装的前提条件和操作系统要求是否已经满足。",
+      "question": "区块链管理工具安装前，需要查看安装的前提条件和操作系统要求是否已",
       "answer": true
     },
     {
