@@ -1,0 +1,102 @@
+{
+  "info": {
+    "title": "区块链技术实操指南",
+    "totalPractice": 4
+  },
+  "baseSteps": {
+    "title": "前置准备：激活WeBase系统",
+    "description": "每次实操前需先启动区块链系统",
+    "steps": [
+      { "step": 1, "action": "打开虚拟机" },
+      { "step": 2, "action": "切换root用户", "command": "sudo su", "note": "密码：123456" },
+      { "step": 3, "action": "进入webase目录", "command": "cd /home/test2/" },
+      { "step": 4, "action": "查看目录内容", "command": "ls" },
+      { "step": 5, "action": "进入webase-deploy文件夹", "command": "cd webase-deploy/" },
+      { "step": 6, "action": "启动Docker容器", "command": "python3 deploy.py startDockerAll", "note": "看到successfully表示激活成功，等待30秒完成启动" },
+      { "step": 7, "action": "打开浏览器访问系统", "command": "127.0.0.1:5000", "note": "右上角切换中文模式，登录账号：admin，密码：Qkl123456" }
+    ]
+  },
+  "practiceTasks": [
+    {
+      "id": 1,
+      "title": "Postman安装与配置",
+      "type": "工具配置",
+      "description": "安装并配置接口测试工具Postman",
+      "output": "保存运行界面截图",
+      "steps": [
+        { "step": 1, "action": "下载并安装Postman" },
+        { "step": 2, "action": "打开Postman，保存运行界面截图" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "智能合约文件上传与部署",
+      "type": "合约操作",
+      "description": "上传合约文件并完成部署",
+      "output": "截图保存到相应位置",
+      "steps": [
+        { "step": 1, "action": "上传文件", "detail": "/home/test2下的Proxy文件夹下的文件全部上传" },
+        { "step": 2, "action": "新建文件夹", "detail": "新建Proxy文件夹，新建文件Proxy存放到该文件夹下" },
+        { "step": 3, "action": "部署合约", "detail": "找到相应文件，依次点击保存、编辑、部署" },
+        { "step": 4, "action": "查看结果", "detail": "查看数据概览，点击已部署合约，截图保存" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "合约接口测试",
+      "type": "接口测试",
+      "description": "使用Postman测试合约接口",
+      "preSteps": [
+        { "step": 1, "action": "查看接口文档", "commands": ["cd ../", "ls", "cat 接口文档测试存证接口.txt"] },
+        { "step": 2, "action": "查询虚拟机IP地址", "command": "ifconfig", "note": "记录IP地址，Postman测试需要用到" }
+      ],
+      "steps": [
+        { "step": 1, "action": "打开Postman" },
+        { "step": 2, "action": "将curl地址输入到GET栏" },
+        { "step": 3, "action": "修改IP地址为查询到的地址", "example": "如：192.168.77.128" },
+        { "step": 4, "action": "点击Send发送请求" }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "区块链接口测试",
+      "type": "接口测试",
+      "description": "测试区块链高度、区块信息、交易信息接口",
+      "preSteps": [
+        { "step": 1, "action": "查看API接口文档", "commands": ["cd ../", "ls", "cat API接口文档.txt"], "note": "获取3个HTTP地址" },
+        { "step": 2, "action": "查询虚拟机IP地址", "command": "ifconfig" }
+      ],
+      "subTasks": [
+        {
+          "name": "测试区块链高度接口",
+          "output": "2-2-1.png",
+          "steps": [
+            { "step": 1, "action": "将第一个地址输入到GET栏" },
+            { "step": 2, "action": "修改IP地址", "example": "如：192.168.77.128" },
+            { "step": 3, "action": "点击Send，截图保存" }
+          ]
+        },
+        {
+          "name": "测试区块信息接口",
+          "output": "2-2-2.png",
+          "steps": [
+            { "step": 1, "action": "将第二个地址输入到GET栏" },
+            { "step": 2, "action": "修改IP地址" },
+            { "step": 3, "action": "点击Send，截图保存" }
+          ]
+        },
+        {
+          "name": "测试交易信息接口",
+          "output": "2-2-3.png",
+          "steps": [
+            { "step": 1, "action": "将第三个地址输入到GET栏" },
+            { "step": 2, "action": "修改IP地址" },
+            { "step": 3, "action": "复制第二步结果中的Hash值" },
+            { "step": 4, "action": "将Hash值覆盖地址栏中的{{blockhash}}" },
+            { "step": 5, "action": "点击Send，截图保存" }
+          ]
+        }
+      ]
+    }
+  ]
+}
