@@ -35,7 +35,7 @@ export default function HomePage() {
       <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <h1 className="text-lg font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            在线考试系统
+            B-Exam
           </h1>
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-600">{user?.name}</span>
