@@ -80,7 +80,7 @@ export default function ChoiceQuestion({ question, index }) {
         ))}
       </div>
 
-      {showFeedback && isAnswered && (
+      {showFeedback && isAnswered && mode !== 'study' && (
         <div className={`mt-5 ml-14 p-4 rounded-xl flex items-center gap-3 ${
           isCorrect
             ? 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border border-green-200'
