@@ -1,58 +1,139 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
+import { post } from '../services/api';
+import { judgmentToApi } from '../services/adapter';
 
 const ExamContext = createContext();
 
-export function ExamProvider({ children, examData }) {
-  const [choiceAnswers, setChoiceAnswers] = useState({});
-  const [judgmentAnswers, setJudgmentAnswers] = useState({});
+function getStorageKey(subjectId, mode, examSessionId) {
+  if (mode === 'exam' && examSessionId) {
+    return `exam-${subjectId}-${examSessionId}`;
+  }
+  return `answers-${subjectId}-${mode}`;
+}
+
+export function ExamProvider({ children, questions, mode, subjectId, examSessionId }) {
+  const [answers, setAnswers] = useState({});
+  const [scoreResult, setScoreResult] = useState(null);
+  const [examSubmitted, setExamSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  const storageKey = getStorageKey(subjectId, mode, examSessionId);
 
   useEffect(() => {
-    const savedChoice = localStorage.getItem(`exam-${examData.info.title}-choice`);
-    const savedJudgment = localStorage.getItem(`exam-${examData.info.title}-judgment`);
-    if (savedChoice) setChoiceAnswers(JSON.parse(savedChoice));
-    if (savedJudgment) setJudgmentAnswers(JSON.parse(savedJudgment));
-  }, [examData.info.title]);
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        const valid = {};
+        const questionIds = new Set(questions.map(q => String(q.id)));
+        for (const [id, val] of Object.entries(parsed)) {
+          if (questionIds.has(id)) valid[id] = val;
+        }
+        setAnswers(valid);
+      } catch {}
+    } else if (mode === 'study' && questions.length > 0) {
+      const autoAnswers = {};
+      questions.forEach(q => {
+        if (q.answer !== undefined) {
+          autoAnswers[String(q.id)] = q.answer;
+        }
+      });
+      setAnswers(autoAnswers);
+    } else {
+      setAnswers({});
+    }
+    setScoreResult(null);
+    setExamSubmitted(false);
+  }, [storageKey, questions, mode]);
 
   useEffect(() => {
-    localStorage.setItem(`exam-${examData.info.title}-choice`, JSON.stringify(choiceAnswers));
-    localStorage.setItem(`exam-${examData.info.title}-judgment`, JSON.stringify(judgmentAnswers));
-  }, [choiceAnswers, judgmentAnswers, examData.info.title]);
+    if (Object.keys(answers).length > 0 && mode === 'exam' && !examSubmitted) {
+      localStorage.setItem(storageKey, JSON.stringify(answers));
+    }
+  }, [answers, storageKey, mode, examSubmitted]);
 
-  const setChoiceAnswer = (id, answer) => {
-    setChoiceAnswers(prev => ({ ...prev, [id]: answer }));
-  };
+  const setAnswer = useCallback((id, value) => {
+    setAnswers(prev => ({ ...prev, [String(id)]: value }));
+  }, []);
 
-  const setJudgmentAnswer = (id, answer) => {
-    setJudgmentAnswers(prev => ({ ...prev, [id]: answer }));
-  };
+  const clearAnswers = useCallback(() => {
+    setAnswers({});
+    localStorage.removeItem(storageKey);
+    setScoreResult(null);
+    setExamSubmitted(false);
+  }, [storageKey]);
 
-  const resetAnswers = () => {
-    setChoiceAnswers({});
-    setJudgmentAnswers({});
-    localStorage.removeItem(`exam-${examData.info.title}-choice`);
-    localStorage.removeItem(`exam-${examData.info.title}-judgment`);
-  };
+  const submitExam = useCallback(async () => {
+    if (!examSessionId) return;
+    setSubmitting(true);
+    try {
+      const apiAnswers = {};
+      for (const [qId, answer] of Object.entries(answers)) {
+        const question = questions.find(q => String(q.id) === qId);
+        if (question?.__type === 'judgment') {
+          apiAnswers[qId] = judgmentToApi(answer);
+        } else {
+          apiAnswers[qId] = answer;
+        }
+      }
+      const result = await post(`/exams/session/${examSessionId}/submit`, { answers: apiAnswers });
+      setScoreResult(result);
+      setExamSubmitted(true);
+      localStorage.removeItem(storageKey);
+      return result;
+    } finally {
+      setSubmitting(false);
+    }
+  }, [answers, examSessionId, questions, storageKey]);
 
-  const stats = {
-    totalChoice: examData.choiceQuestions.length,
-    totalJudgment: examData.judgmentQuestions.length,
-    answeredChoice: Object.keys(choiceAnswers).length,
-    answeredJudgment: Object.keys(judgmentAnswers).length,
-    correctChoice: examData.choiceQuestions.filter(q => choiceAnswers[q.id] === q.answer).length,
-    correctJudgment: examData.judgmentQuestions.filter(q => judgmentAnswers[q.id] === q.answer).length,
-    wrongChoice: examData.choiceQuestions.filter(q => choiceAnswers[q.id] && choiceAnswers[q.id] !== q.answer).length,
-    wrongJudgment: examData.judgmentQuestions.filter(q => judgmentAnswers[q.id] !== undefined && judgmentAnswers[q.id] !== q.answer).length,
-  };
+  const stats = useMemo(() => {
+    if (mode === 'exam' && scoreResult) {
+      return {
+        totalChoice: scoreResult.choice_total || 0,
+        totalJudgment: scoreResult.judgment_total || 0,
+        answeredChoice: scoreResult.choice_total || 0,
+        answeredJudgment: scoreResult.judgment_total || 0,
+        correctChoice: scoreResult.choice_correct || 0,
+        correctJudgment: scoreResult.judgment_correct || 0,
+        wrongChoice: (scoreResult.choice_total || 0) - (scoreResult.choice_correct || 0),
+        wrongJudgment: (scoreResult.judgment_total || 0) - (scoreResult.judgment_correct || 0),
+        totalScore: scoreResult.total_score,
+        wrongCount: scoreResult.wrong_count,
+      };
+    }
+
+    const choiceQs = questions.filter(q => q.__type === 'choice');
+    const judgmentQs = questions.filter(q => q.__type === 'judgment');
+
+    const answeredChoice = choiceQs.filter(q => answers[String(q.id)] !== undefined).length;
+    const answeredJudgment = judgmentQs.filter(q => answers[String(q.id)] !== undefined).length;
+
+    const showCorrect = mode !== 'exam';
+
+    return {
+      totalChoice: choiceQs.length,
+      totalJudgment: judgmentQs.length,
+      answeredChoice,
+      answeredJudgment,
+      correctChoice: showCorrect ? choiceQs.filter(q => answers[String(q.id)] === q.answer).length : 0,
+      correctJudgment: showCorrect ? judgmentQs.filter(q => answers[String(q.id)] === q.answer).length : 0,
+      wrongChoice: showCorrect ? choiceQs.filter(q => answers[String(q.id)] !== undefined && answers[String(q.id)] !== q.answer).length : 0,
+      wrongJudgment: showCorrect ? judgmentQs.filter(q => answers[String(q.id)] !== undefined && answers[String(q.id)] !== q.answer).length : 0,
+    };
+  }, [questions, answers, mode, scoreResult]);
 
   return (
     <ExamContext.Provider value={{
-      examData,
-      choiceAnswers,
-      judgmentAnswers,
-      setChoiceAnswer,
-      setJudgmentAnswer,
-      resetAnswers,
+      questions,
+      answers,
+      setAnswer,
       stats,
+      mode,
+      scoreResult,
+      examSubmitted,
+      submitting,
+      submitExam,
+      clearAnswers,
     }}>
       {children}
     </ExamContext.Provider>
