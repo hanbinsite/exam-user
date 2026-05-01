@@ -1,14 +1,39 @@
 const BASE_URL = 'https://exam-server.hanbin123.com/api/v1';
 
-let token = localStorage.getItem('auth_token');
+const STORAGE_KEY = 'auth_session';
+const OBFUSCATE_KEY = 0x5a;
+
+function obfuscate(str) {
+  return btoa(
+    String.fromCharCode(...[...str].map((c) => c.charCodeAt(0) ^ OBFUSCATE_KEY))
+  );
+}
+
+function deobfuscate(encoded) {
+  try {
+    const raw = atob(encoded);
+    return String.fromCharCode(...[...raw].map((c) => c.charCodeAt(0) ^ OBFUSCATE_KEY));
+  } catch {
+    return null;
+  }
+}
+
+let token = (function hydrate() {
+  const stored = sessionStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    return deobfuscate(stored);
+  }
+  return null;
+})();
+
 let onUnauthorized = null;
 
 export function setToken(t) {
   token = t;
   if (t) {
-    localStorage.setItem('auth_token', t);
+    sessionStorage.setItem(STORAGE_KEY, obfuscate(t));
   } else {
-    localStorage.removeItem('auth_token');
+    sessionStorage.removeItem(STORAGE_KEY);
   }
 }
 
@@ -18,6 +43,12 @@ export function getToken() {
 
 export function setOnUnauthorized(fn) {
   onUnauthorized = fn;
+}
+
+function clearSession() {
+  token = null;
+  sessionStorage.removeItem(STORAGE_KEY);
+  if (onUnauthorized) onUnauthorized();
 }
 
 async function request(method, path, body) {
@@ -31,9 +62,8 @@ async function request(method, path, body) {
   const json = await res.json();
 
   if (json.code !== 200) {
-    if (res.status === 401 && onUnauthorized) {
-      setToken(null);
-      onUnauthorized();
+    if (res.status === 401) {
+      clearSession();
     }
     throw new Error(json.message || 'Request failed');
   }

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { get, post, setToken, getToken, setOnUnauthorized } from '../services/api';
+import { get, post, put, setToken, getToken, setOnUnauthorized } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -17,6 +17,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     setOnUnauthorized(() => {
+      setToken(null);
       setUser(null);
     });
   }, []);
