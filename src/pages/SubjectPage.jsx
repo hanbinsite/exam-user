@@ -5,6 +5,7 @@ import { get } from '../services/api';
 import { adaptQuestion } from '../services/adapter';
 import StatsCard from '../components/StatsCard';
 import ChoiceQuestion from '../components/ChoiceQuestion';
+import MultiChoiceQuestion from '../components/MultiChoiceQuestion';
 import JudgmentQuestion from '../components/JudgmentQuestion';
 import ExamSelector from '../components/ExamSelector';
 
@@ -71,6 +72,7 @@ export default function SubjectPage() {
   }, [fetchQuestions]);
 
   const choiceQuestions = questions.filter(q => q.__type === 'choice');
+  const multiChoiceQuestions = questions.filter(q => q.__type === 'multi_choice');
   const judgmentQuestions = questions.filter(q => q.__type === 'judgment');
 
   return (
@@ -154,13 +156,30 @@ export default function SubjectPage() {
                   <span className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-xl flex items-center justify-center text-sm shadow-lg">
                     选
                   </span>
-                  <span>选择题</span>
+                  <span>单选题</span>
                   <span className="text-sm font-normal text-gray-500 bg-blue-100 px-3 py-1 rounded-full">
                     {choiceQuestions.length} 题
                   </span>
                 </h2>
                 {choiceQuestions.map((q, idx) => (
                   <ChoiceQuestion key={q.id} question={q} index={idx} />
+                ))}
+              </section>
+            )}
+
+            {multiChoiceQuestions.length > 0 && (
+              <section className="mb-8">
+                <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-3">
+                  <span className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 text-white rounded-xl flex items-center justify-center text-sm shadow-lg">
+                    多
+                  </span>
+                  <span>多选题</span>
+                  <span className="text-sm font-normal text-gray-500 bg-amber-100 px-3 py-1 rounded-full">
+                    {multiChoiceQuestions.length} 题
+                  </span>
+                </h2>
+                {multiChoiceQuestions.map((q, idx) => (
+                  <MultiChoiceQuestion key={q.id} question={q} index={idx} />
                 ))}
               </section>
             )}

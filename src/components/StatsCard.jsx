@@ -3,10 +3,10 @@ import { useExam } from '../contexts/ExamContext';
 export default function StatsCard() {
   const { stats, mode, scoreResult, examSubmitted, submitting, submitExam, clearAnswers } = useExam();
 
-  const totalQuestions = stats.totalChoice + stats.totalJudgment;
-  const answeredTotal = stats.answeredChoice + stats.answeredJudgment;
-  const correctTotal = stats.correctChoice + stats.correctJudgment;
-  const wrongTotal = stats.wrongChoice + stats.wrongJudgment;
+  const totalQuestions = stats.totalChoice + stats.totalMultiChoice + stats.totalJudgment;
+  const answeredTotal = stats.answeredChoice + stats.answeredMultiChoice + stats.answeredJudgment;
+  const correctTotal = stats.correctChoice + stats.correctMultiChoice + stats.correctJudgment;
+  const wrongTotal = stats.wrongChoice + stats.wrongMultiChoice + stats.wrongJudgment;
   const progress = totalQuestions > 0 ? Math.round((answeredTotal / totalQuestions) * 100) : 0;
   const accuracy = answeredTotal > 0 ? Math.round((correctTotal / answeredTotal) * 100) : 0;
 
@@ -94,7 +94,7 @@ export default function StatsCard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 relative">
         <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-4 text-center border border-green-100 hover:shadow-lg transition-all">
           <div className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center mx-auto mb-2 shadow-lg">
             <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -122,7 +122,17 @@ export default function StatsCard() {
             </svg>
           </div>
           <div className="text-3xl font-bold text-blue-600">{stats.answeredChoice}</div>
-          <div className="text-sm text-blue-600 mt-1 font-medium">选择题已答</div>
+          <div className="text-sm text-blue-600 mt-1 font-medium">单选已答</div>
+        </div>
+
+        <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-4 text-center border border-amber-100 hover:shadow-lg transition-all">
+          <div className="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center mx-auto mb-2 shadow-lg">
+            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+          </div>
+          <div className="text-3xl font-bold text-amber-600">{stats.answeredMultiChoice}</div>
+          <div className="text-sm text-amber-600 mt-1 font-medium">多选已答</div>
         </div>
 
         <div className="bg-gradient-to-br from-purple-50 to-violet-50 rounded-2xl p-4 text-center border border-purple-100 hover:shadow-lg transition-all">
@@ -132,7 +142,7 @@ export default function StatsCard() {
             </svg>
           </div>
           <div className="text-3xl font-bold text-purple-600">{stats.answeredJudgment}</div>
-          <div className="text-sm text-purple-600 mt-1 font-medium">判断题已答</div>
+          <div className="text-sm text-purple-600 mt-1 font-medium">判断已答</div>
         </div>
       </div>
 
