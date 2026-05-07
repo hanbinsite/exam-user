@@ -4,9 +4,9 @@ import { useAuth } from '../contexts/AuthContext';
 import { get } from '../services/api';
 
 const MODES = [
-  { key: 'study', label: '学习', color: 'from-blue-500 to-cyan-500', hoverColor: 'from-blue-600 to-cyan-600' },
-  { key: 'practice', label: '练习', color: 'from-emerald-500 to-teal-500', hoverColor: 'from-emerald-600 to-teal-600' },
-  { key: 'exam', label: '考试', color: 'from-orange-500 to-red-500', hoverColor: 'from-orange-600 to-red-600' },
+  { key: 'study', label: '学习', icon: '📖', color: 'from-blue-500 to-cyan-500', bg: 'bg-blue-50 border-blue-200', text: 'text-blue-700' },
+  { key: 'practice', label: '练习', icon: '✏️', color: 'from-emerald-500 to-teal-500', bg: 'bg-emerald-50 border-emerald-200', text: 'text-emerald-700' },
+  { key: 'exam', label: '考试', icon: '📝', color: 'from-orange-500 to-red-500', bg: 'bg-orange-50 border-orange-200', text: 'text-orange-700' },
 ];
 
 export default function HomePage() {
@@ -88,51 +88,59 @@ export default function HomePage() {
             {subjects.map((subject) => (
               <div
                 key={subject.id}
-                className="block bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
               >
-                <div className="p-6 flex items-center gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-white text-2xl font-bold group-hover:scale-110 transition-transform">
-                    {subject.name.charAt(0)}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-800 mb-1 group-hover:text-indigo-600 transition-colors">
-                      {subject.name}
-                    </h3>
-                    <p className="text-gray-500 text-sm mb-2">{subject.description}</p>
-                    <div className="flex gap-4 text-sm">
-                      <span className="inline-flex items-center gap-1 text-blue-600">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-                          <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
-                        </svg>
-                        {subject.stats?.totalQuestions || 0} 题
-                      </span>
-                      {subject.stats?.totalExams > 0 && (
-                        <span className="inline-flex items-center gap-1 text-purple-600">
-                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                          </svg>
-                          {subject.stats.totalExams} 场考试
-                        </span>
-                      )}
+                <div className="p-6">
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-white text-xl font-bold group-hover:scale-110 transition-transform shadow-lg">
+                      {subject.name.charAt(0)}
                     </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-xl font-bold text-gray-800 group-hover:text-indigo-600 transition-colors">
+                        {subject.name}
+                      </h3>
+                      <p className="text-gray-500 text-sm truncate">{subject.description}</p>
+                    </div>
+                    <Link
+                      to={`/wrong-questions/${subject.id}`}
+                      className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-red-200 bg-red-50 text-red-600 text-sm font-medium hover:bg-red-100 transition-all"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      错题集
+                    </Link>
                   </div>
-                  <div className="flex-shrink-0 flex flex-col gap-2">
+
+                  <div className="flex items-center gap-3 text-sm text-gray-500 mb-5">
+                    <span className="inline-flex items-center gap-1">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                        <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+                      </svg>
+                      {subject.stats?.totalQuestions || 0} 题
+                    </span>
+                    {subject.stats?.totalExams > 0 && (
+                      <span className="inline-flex items-center gap-1">
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                        </svg>
+                        {subject.stats.totalExams} 场考试
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3">
                     {MODES.map((m) => (
                       <Link
                         key={m.key}
                         to={`/subject/${subject.id}?mode=${m.key}`}
-                        className={`px-4 py-2 bg-gradient-to-r ${m.color} text-white rounded-xl text-sm font-medium hover:${m.hoverColor} transition-all shadow-md hover:shadow-lg text-center`}
+                        className={`flex items-center justify-center gap-2 py-3 rounded-xl border ${m.bg} ${m.text} font-medium hover:shadow-md transition-all`}
                       >
-                        {m.label}
+                        <span>{m.icon}</span>
+                        <span>{m.label}</span>
                       </Link>
                     ))}
-                    <Link
-                      to={`/wrong-questions/${subject.id}`}
-                      className="px-4 py-2 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl text-sm font-medium hover:from-red-600 hover:to-orange-600 transition-all shadow-md hover:shadow-lg text-center"
-                    >
-                      错题集
-                    </Link>
                   </div>
                 </div>
               </div>
