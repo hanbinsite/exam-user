@@ -7,6 +7,18 @@ import ChoiceQuestion from '../components/ChoiceQuestion';
 import MultiChoiceQuestion from '../components/MultiChoiceQuestion';
 import JudgmentQuestion from '../components/JudgmentQuestion';
 
+const TYPE_TAG = {
+  choice: { label: '单选', cls: 'bg-blue-100 text-blue-700' },
+  multi_choice: { label: '多选', cls: 'bg-amber-100 text-amber-700' },
+  judgment: { label: '判断', cls: 'bg-purple-100 text-purple-700' },
+};
+
+function formatAnswer(val) {
+  if (val === 'true') return '正确';
+  if (val === 'false') return '错误';
+  return val;
+}
+
 export default function WrongQuestionsPage() {
   const { subjectId } = useParams();
   const navigate = useNavigate();
@@ -20,6 +32,7 @@ export default function WrongQuestionsPage() {
   const [subjectInfo, setSubjectInfo] = useState(null);
   const [mastering, setMastering] = useState({});
   const [filterMastered, setFilterMastered] = useState(null);
+  const [questionDetails, setQuestionDetails] = useState({});
   const [practiceQuestions, setPracticeQuestions] = useState([]);
   const [practiceLoading, setPracticeLoading] = useState(false);
 
@@ -40,11 +53,28 @@ export default function WrongQuestionsPage() {
       let params = `subjectId=${subjectId}&page=${page}&pageSize=20`;
       if (filterMastered !== null) params += `&mastered=${filterMastered}`;
       const res = await get(`/wrong-questions?${params}`);
-      setQuestions(res.questions || []);
+      const list = res.questions || [];
+      setQuestions(list);
       setTotal(res.total || 0);
+
+      const missing = list
+        .map(q => q.question_id)
+        .filter(id => !questionDetails[id]);
+      if (missing.length > 0) {
+        const details = await Promise.all(
+          missing.map(id => get(`/questions/${id}`).catch(() => null))
+        );
+        setQuestionDetails(prev => {
+          const next = { ...prev };
+          details.forEach(d => {
+            if (d) next[d.id] = d;
+          });
+          return next;
+        });
+      }
     } catch {}
     setLoading(false);
-  }, [subjectId, page, filterMastered]);
+  }, [subjectId, page, filterMastered, questionDetails]);
 
   useEffect(() => {
     fetchStats();
@@ -52,7 +82,7 @@ export default function WrongQuestionsPage() {
 
   useEffect(() => {
     if (tab === 'list') fetchQuestions();
-  }, [tab, fetchQuestions]);
+  }, [tab, page, filterMastered]);
 
   const handleMaster = async (wrongId) => {
     setMastering(prev => ({ ...prev, [wrongId]: true }));
@@ -187,92 +217,94 @@ export default function WrongQuestionsPage() {
             ) : (
               <div className="space-y-4">
                 {questions.map((q, idx) => {
-                  const typeTag = q.type?.name === 'multi_choice' ? '多选' : q.type?.display_name || '题目';
+                  const detail = questionDetails[q.question_id];
+                  const qType = q.question?.type?.name;
+                  const tag = TYPE_TAG[qType] || { label: '题目', cls: 'bg-gray-100 text-gray-700' };
+                  const options = detail?.content?.options || [];
+
                   return (
-                    <div key={q.id} className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+                    <div key={q.wrong_id} className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
                       <div className="flex items-start gap-4 mb-4">
                         <span className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 text-white rounded-xl flex items-center justify-center font-bold text-sm shadow-lg">
-                          {idx + 1}
+                          {(page - 1) * 20 + idx + 1}
                         </span>
-                        <p className="text-gray-800 font-medium leading-relaxed flex-1 text-base">{q.title}</p>
-                        <span className={`flex-shrink-0 text-xs px-2 py-1 rounded-full font-medium ${
-                          q.type?.name === 'multi_choice' ? 'bg-amber-100 text-amber-700' :
-                          q.type?.name === 'choice' ? 'bg-blue-100 text-blue-700' :
-                          'bg-purple-100 text-purple-700'
-                        }`}>{typeTag}</span>
+                        <p className="text-gray-800 font-medium leading-relaxed flex-1 text-base">{q.question?.title}</p>
+                        <span className={`flex-shrink-0 text-xs px-2 py-1 rounded-full font-medium ${tag.cls}`}>{tag.label}</span>
                       </div>
 
-                      {q.content?.options && (
+                      {options.length > 0 && (
                         <div className="space-y-2 ml-14 mb-4">
-                          {q.content.options.map(opt => (
-                            <div
-                              key={opt.key}
-                              className={`flex items-center gap-3 p-3 rounded-lg text-sm ${
-                                opt.key === q.correct_answer
-                                  ? 'bg-green-50 text-green-800 border border-green-200'
-                                  : opt.key === q.user_answer && opt.key !== q.correct_answer
-                                    ? 'bg-red-50 text-red-800 border border-red-200'
+                          {options.map(opt => {
+                            const correctKeys = q.correct_answer ? q.correct_answer.split('') : [];
+                            const userKeys = q.user_answer ? q.user_answer.split('') : [];
+                            const isCorrect = correctKeys.includes(opt.key);
+                            const isWrong = userKeys.includes(opt.key) && !correctKeys.includes(opt.key);
+                            return (
+                              <div
+                                key={opt.key}
+                                className={`flex items-center gap-3 p-3 rounded-lg text-sm ${
+                                  isCorrect ? 'bg-green-50 text-green-800 border border-green-200'
+                                    : isWrong ? 'bg-red-50 text-red-800 border border-red-200'
                                     : 'bg-gray-50 text-gray-600'
-                              }`}
-                            >
-                              <span className={`w-7 h-7 rounded-md flex items-center justify-center text-xs font-semibold ${
-                                opt.key === q.correct_answer
-                                  ? 'bg-green-500 text-white'
-                                  : opt.key === q.user_answer && opt.key !== q.correct_answer
-                                    ? 'bg-red-500 text-white'
+                                }`}
+                              >
+                                <span className={`w-7 h-7 rounded-md flex items-center justify-center text-xs font-semibold ${
+                                  isCorrect ? 'bg-green-500 text-white'
+                                    : isWrong ? 'bg-red-500 text-white'
                                     : 'bg-gray-200 text-gray-600'
-                              }`}>{opt.key}</span>
-                              <span className="flex-1">{opt.text}</span>
-                              {opt.key === q.correct_answer && (
-                                <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              )}
-                              {opt.key === q.user_answer && opt.key !== q.correct_answer && (
-                                <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                </svg>
-                              )}
-                            </div>
-                          ))}
+                                }`}>{opt.key}</span>
+                                <span className="flex-1">{opt.text}</span>
+                                {isCorrect && (
+                                  <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                  </svg>
+                                )}
+                                {isWrong && (
+                                  <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                  </svg>
+                                )}
+                              </div>
+                            );
+                          })}
                         </div>
                       )}
 
-                      {q.type?.name === 'judgment' && (
+                      {qType === 'judgment' && options.length === 0 && (
                         <div className="flex gap-3 ml-14 mb-4">
                           <span className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                            q.correct_answer === 'true'
-                              ? 'bg-green-50 text-green-800 border border-green-200'
-                              : q.user_answer === 'true' && q.correct_answer !== 'true'
-                                ? 'bg-red-50 text-red-800 border border-red-200'
-                                : 'bg-gray-50 text-gray-600'
-                          }`}>正确 {q.correct_answer === 'true' && '✓'} {q.user_answer === 'true' && q.correct_answer !== 'true' && '✗'}</span>
+                            q.correct_answer === 'true' ? 'bg-green-50 text-green-800 border border-green-200'
+                              : q.user_answer === 'true' && q.correct_answer !== 'true' ? 'bg-red-50 text-red-800 border border-red-200'
+                              : 'bg-gray-50 text-gray-600'
+                          }`}>
+                            正确{q.correct_answer === 'true' ? ' ✓' : ''}{q.user_answer === 'true' && q.correct_answer !== 'true' ? ' ✗' : ''}
+                          </span>
                           <span className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                            q.correct_answer === 'false'
-                              ? 'bg-green-50 text-green-800 border border-green-200'
-                              : q.user_answer === 'false' && q.correct_answer !== 'false'
-                                ? 'bg-red-50 text-red-800 border border-red-200'
-                                : 'bg-gray-50 text-gray-600'
-                          }`}>错误 {q.correct_answer === 'false' && '✓'} {q.user_answer === 'false' && q.correct_answer !== 'false' && '✗'}</span>
+                            q.correct_answer === 'false' ? 'bg-green-50 text-green-800 border border-green-200'
+                              : q.user_answer === 'false' && q.correct_answer !== 'false' ? 'bg-red-50 text-red-800 border border-red-200'
+                              : 'bg-gray-50 text-gray-600'
+                          }`}>
+                            错误{q.correct_answer === 'false' ? ' ✓' : ''}{q.user_answer === 'false' && q.correct_answer !== 'false' ? ' ✗' : ''}
+                          </span>
                         </div>
                       )}
 
                       <div className="flex items-center gap-3 ml-14">
                         <div className="flex items-center gap-2 text-sm">
-                          <span className="text-red-500">你的答案: <span className="font-semibold">{q.user_answer === 'true' ? '正确' : q.user_answer === 'false' ? '错误' : q.user_answer}</span></span>
+                          <span className="text-red-500">你的答案: <span className="font-semibold">{formatAnswer(q.user_answer)}</span></span>
                           <span className="text-gray-300">|</span>
-                          <span className="text-green-600">正确答案: <span className="font-semibold">{q.correct_answer === 'true' ? '正确' : q.correct_answer === 'false' ? '错误' : q.correct_answer}</span></span>
+                          <span className="text-green-600">正确答案: <span className="font-semibold">{formatAnswer(q.correct_answer)}</span></span>
                         </div>
                         <div className="flex-1" />
-                        {q.mastered ? (
+                        {q.is_mastered ? (
                           <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">已掌握</span>
                         ) : (
                           <button
-                            onClick={() => handleMaster(q.id)}
-                            disabled={mastering[q.id]}
+                            onClick={() => handleMaster(q.wrong_id)}
+                            disabled={mastering[q.wrong_id]}
                             className="text-xs bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full font-medium hover:from-green-600 hover:to-emerald-600 transition-all disabled:opacity-50"
                           >
-                            {mastering[q.id] ? '处理中...' : '标记已掌握'}
+                            {mastering[q.wrong_id] ? '处理中...' : '标记已掌握'}
                           </button>
                         )}
                       </div>
