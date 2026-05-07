@@ -4,10 +4,10 @@ import { useAuth } from '../contexts/AuthContext';
 import { get } from '../services/api';
 
 const MODES = [
+  { key: 'materials', label: '资料', icon: '📘', bg: 'bg-teal-50 border-teal-200', text: 'text-teal-700', isLink: true },
   { key: 'study', label: '学习', icon: '📖', color: 'from-blue-500 to-cyan-500', bg: 'bg-blue-50 border-blue-200', text: 'text-blue-700' },
   { key: 'practice', label: '练习', icon: '✏️', color: 'from-emerald-500 to-teal-500', bg: 'bg-emerald-50 border-emerald-200', text: 'text-emerald-700' },
   { key: 'exam', label: '考试', icon: '📝', color: 'from-orange-500 to-red-500', bg: 'bg-orange-50 border-orange-200', text: 'text-orange-700' },
-  { key: 'materials', label: '资料', icon: '📘', bg: 'bg-teal-50 border-teal-200', text: 'text-teal-700', isLink: true },
 ];
 
 export default function HomePage() {
