@@ -94,18 +94,25 @@ export function ExamProvider({ children, questions, mode, subjectId, examSession
 
   const stats = useMemo(() => {
     if (mode === 'exam' && scoreResult) {
+      const multiChoiceQs = questions.filter(q => q.__type === 'multi_choice');
+      const localAnsweredMultiChoice = multiChoiceQs.filter(q => {
+        const a = answers[String(q.id)];
+        return Array.isArray(a) ? a.length > 0 : a !== undefined;
+      }).length;
+      const typeScores = scoreResult.type_scores || {};
+      const mcScore = typeScores.multi_choice || {};
       return {
         totalChoice: scoreResult.choice_total || 0,
-        totalMultiChoice: scoreResult.multi_choice_total || 0,
+        totalMultiChoice: mcScore.total || multiChoiceQs.length,
         totalJudgment: scoreResult.judgment_total || 0,
         answeredChoice: scoreResult.choice_total || 0,
-        answeredMultiChoice: scoreResult.multi_choice_total || 0,
+        answeredMultiChoice: mcScore.total || localAnsweredMultiChoice,
         answeredJudgment: scoreResult.judgment_total || 0,
         correctChoice: scoreResult.choice_correct || 0,
-        correctMultiChoice: scoreResult.multi_choice_correct || 0,
+        correctMultiChoice: mcScore.correct || 0,
         correctJudgment: scoreResult.judgment_correct || 0,
         wrongChoice: (scoreResult.choice_total || 0) - (scoreResult.choice_correct || 0),
-        wrongMultiChoice: (scoreResult.multi_choice_total || 0) - (scoreResult.multi_choice_correct || 0),
+        wrongMultiChoice: (mcScore.total || localAnsweredMultiChoice) - (mcScore.correct || 0),
         wrongJudgment: (scoreResult.judgment_total || 0) - (scoreResult.judgment_correct || 0),
         totalScore: scoreResult.total_score,
         wrongCount: scoreResult.wrong_count,
