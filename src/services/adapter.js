@@ -1,5 +1,5 @@
-const JUDGMENT_FROM_API = { '对': true, '错': false };
-const JUDGMENT_TO_API = { true: '对', false: '错' };
+const JUDGMENT_FROM_API = { '对': true, '错': false, 'true': true, 'false': false };
+const JUDGMENT_TO_API = { true: 'true', false: 'false' };
 
 export function adaptQuestion(q) {
   const adapted = {
