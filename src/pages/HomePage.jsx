@@ -127,6 +127,12 @@ export default function HomePage() {
                         {m.label}
                       </Link>
                     ))}
+                    <Link
+                      to={`/wrong-questions/${subject.id}`}
+                      className="px-4 py-2 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl text-sm font-medium hover:from-red-600 hover:to-orange-600 transition-all shadow-md hover:shadow-lg text-center"
+                    >
+                      错题集
+                    </Link>
                   </div>
                 </div>
               </div>
