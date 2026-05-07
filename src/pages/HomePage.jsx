@@ -7,6 +7,7 @@ const MODES = [
   { key: 'study', label: '学习', icon: '📖', color: 'from-blue-500 to-cyan-500', bg: 'bg-blue-50 border-blue-200', text: 'text-blue-700' },
   { key: 'practice', label: '练习', icon: '✏️', color: 'from-emerald-500 to-teal-500', bg: 'bg-emerald-50 border-emerald-200', text: 'text-emerald-700' },
   { key: 'exam', label: '考试', icon: '📝', color: 'from-orange-500 to-red-500', bg: 'bg-orange-50 border-orange-200', text: 'text-orange-700' },
+  { key: 'materials', label: '资料', icon: '📘', bg: 'bg-teal-50 border-teal-200', text: 'text-teal-700', isLink: true },
 ];
 
 export default function HomePage() {
@@ -130,11 +131,11 @@ export default function HomePage() {
                     )}
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-4 gap-3">
                     {MODES.map((m) => (
                       <Link
                         key={m.key}
-                        to={`/subject/${subject.id}?mode=${m.key}`}
+                        to={m.isLink ? `/materials/${subject.id}` : `/subject/${subject.id}?mode=${m.key}`}
                         className={`flex items-center justify-center gap-2 py-3 rounded-xl border ${m.bg} ${m.text} font-medium hover:shadow-md transition-all`}
                       >
                         <span>{m.icon}</span>
