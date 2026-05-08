@@ -16,15 +16,14 @@ export default function HomePage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    async function fetchSubjects() {
-      const { subject_ids } = await get('/auth/my-subjects');
-      if (!subject_ids || subject_ids.length === 0) return [];
-      const details = await Promise.all(
-        subject_ids.map((id) => get(`/subjects/${id}`))
-      );
-      return details;
-    }
-    fetchSubjects()
+    get('/auth/my-subjects')
+      .then(async ({ subject_ids }) => {
+        if (!subject_ids || subject_ids.length === 0) return [];
+        const results = await Promise.allSettled(
+          subject_ids.map((id) => get(`/subjects/${id}`))
+        );
+        return results.filter(r => r.status === 'fulfilled').map(r => r.value);
+      })
       .then(setSubjects)
       .catch((err) => setError(err.message || '加载失败'))
       .finally(() => setLoading(false));

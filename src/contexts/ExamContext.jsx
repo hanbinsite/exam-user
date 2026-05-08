@@ -94,84 +94,100 @@ export function ExamProvider({ children, questions, mode, subjectId, examSession
 
   const stats = useMemo(() => {
     if (mode === 'exam' && scoreResult) {
-      const multiChoiceQs = questions.filter(q => q.__type === 'multi_choice');
-      const localAnsweredMultiChoice = multiChoiceQs.filter(q => {
-        const a = answers[String(q.id)];
-        return Array.isArray(a) ? a.length > 0 : a !== undefined;
-      }).length;
+      let mcTotal = 0, mcAnswered = 0;
+      questions.forEach(q => {
+        if (q.__type === 'multi_choice') {
+          mcTotal++;
+          const a = answers[String(q.id)];
+          if (Array.isArray(a) ? a.length > 0 : a !== undefined) mcAnswered++;
+        }
+      });
       const typeScores = scoreResult.type_scores || {};
       const mcScore = typeScores.multi_choice || {};
       return {
         totalChoice: scoreResult.choice_total || 0,
-        totalMultiChoice: mcScore.total || multiChoiceQs.length,
+        totalMultiChoice: mcScore.total || mcTotal,
         totalJudgment: scoreResult.judgment_total || 0,
         answeredChoice: scoreResult.choice_total || 0,
-        answeredMultiChoice: mcScore.total || localAnsweredMultiChoice,
+        answeredMultiChoice: mcScore.total || mcAnswered,
         answeredJudgment: scoreResult.judgment_total || 0,
         correctChoice: scoreResult.choice_correct || 0,
         correctMultiChoice: mcScore.correct || 0,
         correctJudgment: scoreResult.judgment_correct || 0,
         wrongChoice: (scoreResult.choice_total || 0) - (scoreResult.choice_correct || 0),
-        wrongMultiChoice: (mcScore.total || localAnsweredMultiChoice) - (mcScore.correct || 0),
+        wrongMultiChoice: (mcScore.total || mcAnswered) - (mcScore.correct || 0),
         wrongJudgment: (scoreResult.judgment_total || 0) - (scoreResult.judgment_correct || 0),
         totalScore: scoreResult.total_score,
         wrongCount: scoreResult.wrong_count,
       };
     }
 
-    const choiceQs = questions.filter(q => q.__type === 'choice');
-    const multiChoiceQs = questions.filter(q => q.__type === 'multi_choice');
-    const judgmentQs = questions.filter(q => q.__type === 'judgment');
-
-    const answeredChoice = choiceQs.filter(q => answers[String(q.id)] !== undefined).length;
-    const answeredMultiChoice = multiChoiceQs.filter(q => {
-      const a = answers[String(q.id)];
-      return Array.isArray(a) ? a.length > 0 : a !== undefined;
-    }).length;
-    const answeredJudgment = judgmentQs.filter(q => answers[String(q.id)] !== undefined).length;
-
     const showCorrect = mode !== 'exam';
 
-    const isMultiChoiceCorrect = (q) => {
-      const a = answers[String(q.id)];
-      if (!Array.isArray(a) || a.length === 0) return false;
-      const answerArr = q.answer ? q.answer.split('') : [];
-      return a.length === answerArr.length && a.every(k => answerArr.includes(k));
-    };
+    let totalChoice = 0, totalMultiChoice = 0, totalJudgment = 0;
+    let answeredChoice = 0, answeredMultiChoice = 0, answeredJudgment = 0;
+    let correctChoice = 0, correctMultiChoice = 0, correctJudgment = 0;
+    let wrongChoice = 0, wrongMultiChoice = 0, wrongJudgment = 0;
+
+    questions.forEach(q => {
+      const type = q.__type;
+      const ans = answers[String(q.id)];
+      let hasAnswer, isCorrect;
+
+      if (type === 'choice') {
+        totalChoice++;
+        hasAnswer = ans !== undefined;
+        if (hasAnswer) answeredChoice++;
+        if (showCorrect) {
+          isCorrect = ans === q.answer;
+          if (isCorrect) correctChoice++;
+          else if (hasAnswer) wrongChoice++;
+        }
+      } else if (type === 'multi_choice') {
+        totalMultiChoice++;
+        hasAnswer = Array.isArray(ans) ? ans.length > 0 : ans !== undefined;
+        if (hasAnswer) answeredMultiChoice++;
+        if (showCorrect) {
+          const answerArr = q.answer ? q.answer.split('') : [];
+          isCorrect = Array.isArray(ans) && ans.length === answerArr.length && ans.every(k => answerArr.includes(k));
+          if (isCorrect) correctMultiChoice++;
+          else if (hasAnswer) wrongMultiChoice++;
+        }
+      } else if (type === 'judgment') {
+        totalJudgment++;
+        hasAnswer = ans !== undefined;
+        if (hasAnswer) answeredJudgment++;
+        if (showCorrect) {
+          isCorrect = ans === q.answer;
+          if (isCorrect) correctJudgment++;
+          else if (hasAnswer) wrongJudgment++;
+        }
+      }
+    });
 
     return {
-      totalChoice: choiceQs.length,
-      totalMultiChoice: multiChoiceQs.length,
-      totalJudgment: judgmentQs.length,
-      answeredChoice,
-      answeredMultiChoice,
-      answeredJudgment,
-      correctChoice: showCorrect ? choiceQs.filter(q => answers[String(q.id)] === q.answer).length : 0,
-      correctMultiChoice: showCorrect ? multiChoiceQs.filter(q => isMultiChoiceCorrect(q)).length : 0,
-      correctJudgment: showCorrect ? judgmentQs.filter(q => answers[String(q.id)] === q.answer).length : 0,
-      wrongChoice: showCorrect ? choiceQs.filter(q => answers[String(q.id)] !== undefined && answers[String(q.id)] !== q.answer).length : 0,
-      wrongMultiChoice: showCorrect ? multiChoiceQs.filter(q => {
-        const a = answers[String(q.id)];
-        const hasAnswer = Array.isArray(a) ? a.length > 0 : a !== undefined;
-        return hasAnswer && !isMultiChoiceCorrect(q);
-      }).length : 0,
-      wrongJudgment: showCorrect ? judgmentQs.filter(q => answers[String(q.id)] !== undefined && answers[String(q.id)] !== q.answer).length : 0,
+      totalChoice, totalMultiChoice, totalJudgment,
+      answeredChoice, answeredMultiChoice, answeredJudgment,
+      correctChoice, correctMultiChoice, correctJudgment,
+      wrongChoice, wrongMultiChoice, wrongJudgment,
     };
   }, [questions, answers, mode, scoreResult]);
 
+  const providerValue = useMemo(() => ({
+    questions,
+    answers,
+    setAnswer,
+    stats,
+    mode,
+    scoreResult,
+    examSubmitted,
+    submitting,
+    submitExam,
+    clearAnswers,
+  }), [questions, answers, setAnswer, stats, mode, scoreResult, examSubmitted, submitting, submitExam, clearAnswers]);
+
   return (
-    <ExamContext.Provider value={{
-      questions,
-      answers,
-      setAnswer,
-      stats,
-      mode,
-      scoreResult,
-      examSubmitted,
-      submitting,
-      submitExam,
-      clearAnswers,
-    }}>
+    <ExamContext.Provider value={providerValue}>
       {children}
     </ExamContext.Provider>
   );

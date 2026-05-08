@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { get, post } from '../services/api';
 import { adaptQuestion } from '../services/adapter';
@@ -33,6 +33,7 @@ export default function WrongQuestionsPage() {
   const [mastering, setMastering] = useState({});
   const [filterMastered, setFilterMastered] = useState(null);
   const [questionDetails, setQuestionDetails] = useState({});
+  const loadedIdsRef = useRef(new Set());
   const [practiceQuestions, setPracticeQuestions] = useState([]);
   const [practiceLoading, setPracticeLoading] = useState(false);
 
@@ -59,7 +60,7 @@ export default function WrongQuestionsPage() {
 
       const missing = list
         .map(q => q.question_id)
-        .filter(id => !questionDetails[id]);
+        .filter(id => !loadedIdsRef.current.has(id));
       if (missing.length > 0) {
         const details = await Promise.all(
           missing.map(id => get(`/questions/${id}`).catch(() => null))
@@ -67,14 +68,17 @@ export default function WrongQuestionsPage() {
         setQuestionDetails(prev => {
           const next = { ...prev };
           details.forEach(d => {
-            if (d) next[d.id] = d;
+            if (d) {
+              next[d.id] = d;
+              loadedIdsRef.current.add(d.id);
+            }
           });
           return next;
         });
       }
     } catch {}
     setLoading(false);
-  }, [subjectId, page, filterMastered, questionDetails]);
+  }, [subjectId, page, filterMastered]);
 
   useEffect(() => {
     fetchStats();
