@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 * {
   box-sizing: border-box;
@@ -11,4 +12,24 @@ body {
 
 #root {
   min-height: 100vh;
+}
+
+.markdown-body pre {
+  position: relative;
+}
+
+.markdown-body pre code.hljs {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.markdown-body .code-wrapper .copy-btn {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.markdown-body .code-wrapper:hover .copy-btn {
+  opacity: 1;
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { get } from '../services/api';
-import ReactMarkdown from 'react-markdown';
+import MarkdownContent from '../components/MarkdownContent';
 
 const TYPE_LABELS = {
   study_guide: { label: '学习指南', bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
@@ -56,8 +56,8 @@ function MaterialCard({ item, onExpand, isExpanded }) {
 
       {isExpanded && (
         <div className="px-6 pb-6 border-t border-gray-100">
-          <div className="mt-4 prose prose-sm max-w-none prose-headings:text-gray-800 prose-p:text-gray-600 prose-li:text-gray-600 prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-pre:bg-gray-900 prose-pre:text-gray-100">
-            <ReactMarkdown>{item.content || ''}</ReactMarkdown>
+          <div className="mt-4">
+            <MarkdownContent content={item.content || ''} />
           </div>
           {item.meta && (
             <div className="mt-4 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
