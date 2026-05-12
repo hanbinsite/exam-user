@@ -20,9 +20,10 @@ body {
 
 .markdown-body pre code.hljs {
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0 0 0.75rem 0.75rem;
   font-size: 0.875rem;
   line-height: 1.7;
+  background: #f8fafc;
 }
 
 .markdown-body .code-wrapper .copy-btn {
@@ -32,4 +33,9 @@ body {
 
 .markdown-body .code-wrapper:hover .copy-btn {
   opacity: 1;
+}
+
+.mermaid-container svg {
+  max-width: 100%;
+  height: auto;
 }
