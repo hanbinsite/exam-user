@@ -42,20 +42,20 @@ export default function JudgmentQuestion({ question, index, allowChange = false 
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 mb-4 border border-gray-100 transition-all hover:shadow-xl hover:-translate-y-0.5">
-      <div className="flex items-start gap-4 mb-5">
-        <span className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-xl flex items-center justify-center font-bold text-sm shadow-lg">
+    <div className="bg-white rounded-xl lg:rounded-2xl shadow-lg p-3 lg:p-6 mb-4 border border-gray-100">
+      <div className="flex items-start gap-2 lg:gap-4 mb-3 lg:mb-5">
+        <span className="flex-shrink-0 w-7 h-7 lg:w-10 lg:h-10 bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-lg lg:rounded-xl flex items-center justify-center font-bold text-xs lg:text-sm shadow-lg">
           {index + 1}
         </span>
-        <p className="text-gray-800 font-medium leading-relaxed flex-1 text-base">{question.question}</p>
+        <p className="text-gray-800 font-medium leading-relaxed flex-1 text-sm lg:text-base">{question.question}</p>
       </div>
 
-      <div className="flex gap-4 ml-14">
+      <div className="flex gap-2 lg:gap-4 ml-0 sm:ml-14">
         <button
           onClick={() => handleSelect(true)}
-          className={`flex-1 py-4 px-6 rounded-xl border-2 font-semibold transition-all flex items-center justify-center gap-3 ${getButtonClass(true)}`}
+          className={`flex-1 py-3 lg:py-4 px-4 lg:px-6 rounded-lg lg:rounded-xl border-2 font-semibold transition-all flex items-center justify-center gap-2 lg:gap-3 ${getButtonClass(true)}`}
         >
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+          <div className={`w-6 h-6 lg:w-8 lg:h-8 rounded-lg flex items-center justify-center ${
             showFeedback && isAnswered && question.answer === true
               ? 'bg-green-500'
               : showFeedback && isAnswered && selected === true && !question.answer
@@ -64,7 +64,7 @@ export default function JudgmentQuestion({ question, index, allowChange = false 
                   ? 'bg-indigo-500'
                   : 'bg-green-100'
           }`}>
-            <svg className={`w-5 h-5 ${
+            <svg className={`w-4 h-4 lg:w-5 lg:h-5 ${
               (showFeedback && isAnswered && question.answer === true) ||
               (showFeedback && isAnswered && selected === true && !question.answer) ||
               (!showFeedback && isAnswered && selected === true)
@@ -74,14 +74,14 @@ export default function JudgmentQuestion({ question, index, allowChange = false 
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
             </svg>
           </div>
-          <span className="text-base">正确</span>
+          <span className="text-sm lg:text-base">正确</span>
         </button>
 
         <button
           onClick={() => handleSelect(false)}
-          className={`flex-1 py-4 px-6 rounded-xl border-2 font-semibold transition-all flex items-center justify-center gap-3 ${getButtonClass(false)}`}
+          className={`flex-1 py-3 lg:py-4 px-4 lg:px-6 rounded-lg lg:rounded-xl border-2 font-semibold transition-all flex items-center justify-center gap-2 lg:gap-3 ${getButtonClass(false)}`}
         >
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+          <div className={`w-6 h-6 lg:w-8 lg:h-8 rounded-lg flex items-center justify-center ${
             showFeedback && isAnswered && question.answer === false
               ? 'bg-red-500'
               : showFeedback && isAnswered && selected === false && question.answer
@@ -90,7 +90,7 @@ export default function JudgmentQuestion({ question, index, allowChange = false 
                   ? 'bg-indigo-500'
                   : 'bg-red-100'
           }`}>
-            <svg className={`w-5 h-5 ${
+            <svg className={`w-4 h-4 lg:w-5 lg:h-5 ${
               (showFeedback && isAnswered && question.answer === false) ||
               (showFeedback && isAnswered && selected === false && question.answer) ||
               (!showFeedback && isAnswered && selected === false)
@@ -100,46 +100,46 @@ export default function JudgmentQuestion({ question, index, allowChange = false 
               <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
           </div>
-          <span className="text-base">错误</span>
+          <span className="text-sm lg:text-base">错误</span>
         </button>
       </div>
 
       {showFeedback && isAnswered && mode !== 'study' && mode !== 'exam' && (
-        <div className={`mt-5 ml-14 p-4 rounded-xl flex items-center gap-3 ${
+        <div className={`mt-3 lg:mt-5 ml-0 sm:ml-14 p-3 lg:p-4 rounded-lg lg:rounded-xl flex items-center gap-2 lg:gap-3 ${
           isCorrect
             ? 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border border-green-200'
             : 'bg-gradient-to-r from-red-100 to-rose-100 text-red-800 border border-red-200'
         }`}>
           {isCorrect ? (
             <>
-              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <div className="w-6 h-6 lg:w-8 lg:h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 lg:w-5 lg:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               </div>
-              <span className="font-medium">回答正确！</span>
+              <span className="font-medium text-sm lg:text-base">回答正确！</span>
             </>
           ) : (
             <>
-              <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <div className="w-6 h-6 lg:w-8 lg:h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 lg:w-5 lg:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </div>
-              <span className="font-medium">回答错误，正确答案是 <span className="bg-white px-2 py-1 rounded font-bold">{question.answer ? '正确' : '错误'}</span></span>
+              <span className="font-medium text-sm lg:text-base">回答错误，正确答案是 <span className="bg-white px-2 py-1 rounded font-bold">{question.answer ? '正确' : '错误'}</span></span>
             </>
           )}
         </div>
       )}
 
       {!showFeedback && isAnswered && (
-        <div className="mt-5 ml-14 p-4 rounded-xl flex items-center gap-3 bg-gradient-to-r from-indigo-100 to-blue-100 text-indigo-800 border border-indigo-200">
-          <div className="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
-            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <div className="mt-3 lg:mt-5 ml-0 sm:ml-14 p-3 lg:p-4 rounded-lg lg:rounded-xl flex items-center gap-2 lg:gap-3 bg-gradient-to-r from-indigo-100 to-blue-100 text-indigo-800 border border-indigo-200">
+          <div className="w-6 h-6 lg:w-8 lg:h-8 bg-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg className="w-4 h-4 lg:w-5 lg:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
             </svg>
           </div>
-          <span className="font-medium">已作答</span>
+          <span className="font-medium text-sm lg:text-base">已作答</span>
         </div>
       )}
     </div>

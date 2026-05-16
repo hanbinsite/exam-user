@@ -69,16 +69,16 @@ function ExamContent({ examSession }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-6 px-4 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 pb-20 lg:pb-0">
+      <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 lg:py-6 px-4 shadow-lg">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold">{examSession?.exam_config?.name || '考试模式'}</h1>
-            <p className="text-white/80 text-sm mt-1">
+            <h1 className="text-lg lg:text-2xl font-bold">{examSession?.exam_config?.name || '考试模式'}</h1>
+            <p className="text-white/80 text-xs lg:text-sm mt-0.5 lg:mt-1">
               {currentIndex + 1} / {total}
             </p>
           </div>
-          <div className="flex items-center gap-3 text-sm text-white/70">
+          <div className="hidden lg:flex items-center gap-3 text-sm text-white/70">
             <span>共 {examSession?.question_count || total} 题</span>
             {examSession?.expires_at && (
               <span>截止: {new Date(examSession.expires_at).toLocaleString()}</span>
@@ -87,18 +87,18 @@ function ExamContent({ examSession }) {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-6 flex gap-6">
+      <div className="max-w-6xl mx-auto px-3 lg:px-4 py-3 lg:py-6 flex gap-6">
         <div className="flex-1 min-w-0">
-          <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-sm text-gray-500 font-medium">
+          <div className="bg-white rounded-xl lg:rounded-2xl shadow-lg p-3 lg:p-6 border border-gray-100">
+            <div className="flex items-center justify-between mb-3 lg:mb-6">
+              <span className="text-xs lg:text-sm text-gray-500 font-medium">
                 第 {currentIndex + 1} 题
               </span>
-              <div className="flex gap-1">
+              <div className="hidden lg:flex gap-1 overflow-x-auto max-w-[200px]">
                 {sorted.map((_, i) => (
                   <div
                     key={i}
-                    className={`w-2 h-2 rounded-full ${
+                    className={`flex-shrink-0 w-2 h-2 rounded-full ${
                       i === currentIndex
                         ? 'bg-orange-500 scale-125'
                         : answers[String(sorted[i].id)] !== undefined
@@ -108,6 +108,7 @@ function ExamContent({ examSession }) {
                   />
                 ))}
               </div>
+              <span className="lg:hidden text-xs text-gray-400">{currentIndex + 1}/{total}</span>
             </div>
 
             {current.__type === 'choice' && (
@@ -121,7 +122,7 @@ function ExamContent({ examSession }) {
             )}
           </div>
 
-          <div className="flex items-center justify-between mt-4">
+          <div className="lg:flex hidden items-center justify-between mt-4">
             <button
               onClick={handlePrev}
               disabled={currentIndex === 0}
@@ -155,6 +156,31 @@ function ExamContent({ examSession }) {
           onSubmit={handleSubmit}
           submitting={submitting}
         />
+      </div>
+
+      {/* Mobile fixed bottom nav */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 px-3 py-3 flex items-center justify-between shadow-lg">
+        <button
+          onClick={handlePrev}
+          disabled={currentIndex === 0}
+          className="flex-1 py-2.5 bg-white border-2 border-gray-200 text-gray-700 rounded-xl hover:border-orange-400 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-1 text-sm mr-2"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          上一题
+        </button>
+        <span className="text-xs text-gray-500 flex-shrink-0 mx-1">{currentIndex + 1}/{total}</span>
+        <button
+          onClick={handleNext}
+          disabled={currentIndex === total - 1}
+          className="flex-1 py-2.5 bg-white border-2 border-gray-200 text-gray-700 rounded-xl hover:border-orange-400 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-1 text-sm ml-2"
+        >
+          下一题
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
 
       <BackToTop />

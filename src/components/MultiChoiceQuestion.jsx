@@ -53,23 +53,23 @@ export default function MultiChoiceQuestion({ question, index }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 mb-4 border border-gray-100 transition-all hover:shadow-xl hover:-translate-y-0.5">
-      <div className="flex items-start gap-4 mb-5">
-        <span className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 text-white rounded-xl flex items-center justify-center font-bold text-sm shadow-lg">
+    <div className="bg-white rounded-xl lg:rounded-2xl shadow-lg p-3 lg:p-6 mb-4 border border-gray-100">
+      <div className="flex items-start gap-2 lg:gap-4 mb-3 lg:mb-5">
+        <span className="flex-shrink-0 w-7 h-7 lg:w-10 lg:h-10 bg-gradient-to-br from-amber-500 to-orange-500 text-white rounded-lg lg:rounded-xl flex items-center justify-center font-bold text-xs lg:text-sm shadow-lg">
           {index + 1}
         </span>
-        <p className="text-gray-800 font-medium leading-relaxed flex-1 text-base">{question.question}</p>
+        <p className="text-gray-800 font-medium leading-relaxed flex-1 text-sm lg:text-base">{question.question}</p>
         <span className="flex-shrink-0 text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">多选</span>
       </div>
 
-      <div className="space-y-3 ml-14">
+      <div className="space-y-2 lg:space-y-3 ml-0 sm:ml-14">
         {question.options.map((option) => (
           <div
             key={option.key}
             onClick={() => handleToggle(option.key)}
-            className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-all ${getOptionClass(option.key)}`}
+            className={`flex items-center gap-2 lg:gap-4 p-3 lg:p-4 rounded-lg lg:rounded-xl border-2 transition-all ${getOptionClass(option.key)}`}
           >
-            <span className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-semibold text-sm transition-all ${
+            <span className={`flex-shrink-0 w-6 h-6 lg:w-8 lg:h-8 rounded-lg flex items-center justify-center font-semibold text-xs lg:text-sm transition-all ${
               effectiveShowFeedback && isAnswered && isCorrectOption(option.key)
                 ? 'bg-green-500 text-white'
                 : effectiveShowFeedback && isAnswered && isSelected(option.key) && !isCorrectOption(option.key)
@@ -80,7 +80,7 @@ export default function MultiChoiceQuestion({ question, index }) {
             }`}>
               {option.key}
             </span>
-            <span className="flex-1 text-base">{option.text}</span>
+            <span className="flex-1 text-sm lg:text-base">{option.text}</span>
             {effectiveShowFeedback && isAnswered && isCorrectOption(option.key) && (
               <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                 <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -100,10 +100,10 @@ export default function MultiChoiceQuestion({ question, index }) {
       </div>
 
       {mode === 'practice' && isAnswered && !confirmed && (
-        <div className="mt-5 ml-14">
+        <div className="mt-3 lg:mt-5 ml-0 sm:ml-14">
           <button
             onClick={() => setConfirmed(true)}
-            className="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-medium hover:from-amber-600 hover:to-orange-600 transition-all shadow-md"
+            className="px-5 lg:px-6 py-2 lg:py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg lg:rounded-xl font-medium text-sm lg:text-base hover:from-amber-600 hover:to-orange-600 transition-all shadow-md"
           >
             确认答案
           </button>
@@ -111,41 +111,41 @@ export default function MultiChoiceQuestion({ question, index }) {
       )}
 
       {effectiveShowFeedback && isAnswered && mode !== 'study' && mode !== 'exam' && (
-        <div className={`mt-5 ml-14 p-4 rounded-xl flex items-center gap-3 ${
+        <div className={`mt-3 lg:mt-5 ml-0 sm:ml-14 p-3 lg:p-4 rounded-lg lg:rounded-xl flex items-center gap-2 lg:gap-3 ${
           isCorrect
             ? 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border border-green-200'
             : 'bg-gradient-to-r from-red-100 to-rose-100 text-red-800 border border-red-200'
         }`}>
           {isCorrect ? (
             <>
-              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <div className="w-6 h-6 lg:w-8 lg:h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 lg:w-5 lg:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               </div>
-              <span className="font-medium">回答正确！</span>
+              <span className="font-medium text-sm lg:text-base">回答正确！</span>
             </>
           ) : (
             <>
-              <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <div className="w-6 h-6 lg:w-8 lg:h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 lg:w-5 lg:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </div>
-              <span className="font-medium">回答错误，正确答案是 <span className="bg-white px-2 py-1 rounded font-bold">{question.answer}</span></span>
+              <span className="font-medium text-sm lg:text-base">回答错误，正确答案是 <span className="bg-white px-2 py-1 rounded font-bold">{question.answer}</span></span>
             </>
           )}
         </div>
       )}
 
       {!effectiveShowFeedback && isAnswered && (
-        <div className="mt-5 ml-14 p-4 rounded-xl flex items-center gap-3 bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-800 border border-amber-200">
-          <div className="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
-            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <div className="mt-3 lg:mt-5 ml-0 sm:ml-14 p-3 lg:p-4 rounded-lg lg:rounded-xl flex items-center gap-2 lg:gap-3 bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-800 border border-amber-200">
+          <div className="w-6 h-6 lg:w-8 lg:h-8 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg className="w-4 h-4 lg:w-5 lg:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
             </svg>
           </div>
-          <span className="font-medium">已作答（已选 {selectedArr.join('')}）</span>
+          <span className="font-medium text-sm lg:text-base">已作答（已选 {selectedArr.join('')}）</span>
         </div>
       )}
     </div>
