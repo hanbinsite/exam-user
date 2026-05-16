@@ -71,18 +71,29 @@ function ExamContent({ examSession }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 pb-20 lg:pb-0">
       <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 lg:py-6 px-4 shadow-lg">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="text-lg lg:text-2xl font-bold">{examSession?.exam_config?.name || '考试模式'}</h1>
-            <p className="text-white/80 text-xs lg:text-sm mt-0.5 lg:mt-1">
-              {currentIndex + 1} / {total}
-            </p>
-          </div>
-          <div className="hidden lg:flex items-center gap-3 text-sm text-white/70">
-            <span>共 {examSession?.question_count || total} 题</span>
-            {examSession?.expires_at && (
-              <span>截止: {new Date(examSession.expires_at).toLocaleString()}</span>
-            )}
+        <div className="max-w-6xl mx-auto">
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-1.5 text-white/70 hover:text-white mb-1 lg:mb-2 transition-colors text-xs lg:text-sm"
+          >
+            <svg className="w-3.5 h-3.5 lg:w-4 lg:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            返回首页
+          </button>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-lg lg:text-2xl font-bold">{examSession?.exam_config?.name || '考试模式'}</h1>
+              <p className="text-white/80 text-xs lg:text-sm mt-0.5 lg:mt-1">
+                {currentIndex + 1} / {total}
+              </p>
+            </div>
+            <div className="hidden lg:flex items-center gap-3 text-sm text-white/70">
+              <span>共 {examSession?.question_count || total} 题</span>
+              {examSession?.expires_at && (
+                <span>截止: {new Date(examSession.expires_at).toLocaleString()}</span>
+              )}
+            </div>
           </div>
         </div>
       </div>
