@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import { post } from '../services/api';
-import { judgmentToApi } from '../services/adapter';
+import { judgmentToApi, normalizeMultiAnswer } from '../services/adapter';
 
 const ExamContext = createContext();
 
@@ -148,7 +148,7 @@ export function ExamProvider({ children, questions, mode, subjectId, examSession
         hasAnswer = Array.isArray(ans) ? ans.length > 0 : ans !== undefined;
         if (hasAnswer) answeredMultiChoice++;
         if (showCorrect) {
-          const answerArr = q.answer ? q.answer.split('') : [];
+          const answerArr = normalizeMultiAnswer(q.answer);
           isCorrect = Array.isArray(ans) && ans.length === answerArr.length && ans.every(k => answerArr.includes(k));
           if (isCorrect) correctMultiChoice++;
           else if (hasAnswer) wrongMultiChoice++;

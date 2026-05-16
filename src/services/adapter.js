@@ -38,3 +38,14 @@ export function adaptSubject(s) {
 export function judgmentToApi(value) {
   return JUDGMENT_TO_API[value] ?? value;
 }
+
+export function normalizeMultiAnswer(answer) {
+  if (Array.isArray(answer)) return answer;
+  if (typeof answer === 'string') {
+    if (answer.includes(',')) {
+      return answer.split(',').map(s => s.trim()).filter(Boolean);
+    }
+    return answer.split('');
+  }
+  return [];
+}

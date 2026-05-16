@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackHomeButton from '../components/BackHomeButton';
+import { normalizeMultiAnswer } from '../services/adapter';
 
 function formatAnswer(val, type) {
   if (val === undefined || val === null) return '未作答';
   if (type === 'judgment') return val ? '正确' : '错误';
-  if (type === 'multi_choice') return Array.isArray(val) ? val.join(', ') : String(val);
+  if (type === 'multi_choice') return normalizeMultiAnswer(val).join('、') || '未作答';
   return String(val);
 }
 
@@ -53,8 +54,9 @@ export default function ExamResultPage() {
 
   const wrongQuestions = questions.filter(q => {
     const userAns = answers[String(q.id)];
+    const correctArr = q.__type === 'multi_choice' ? normalizeMultiAnswer(q.answer) : [];
     const isCorrect = q.__type === 'multi_choice'
-      ? Array.isArray(userAns) && userAns.length === (q.answer ? q.answer.split('').length : 0) && userAns.every(k => (q.answer || '').includes(k))
+      ? Array.isArray(userAns) && userAns.length === correctArr.length && userAns.every(k => correctArr.includes(k))
       : userAns === q.answer;
     return userAns !== undefined && !isCorrect;
   });
@@ -134,7 +136,7 @@ export default function ExamResultPage() {
                     {q.options && q.options.length > 0 && (
                       <div className="space-y-2 ml-14 mb-4">
                         {q.options.map(opt => {
-                          const correctKeys = q.answer ? (q.__type === 'multi_choice' ? q.answer.split('') : [q.answer]) : [];
+                          const correctKeys = q.__type === 'multi_choice' ? normalizeMultiAnswer(q.answer) : (q.answer !== undefined ? [q.answer] : []);
                           const userKeys = q.__type === 'multi_choice' ? (userAns || []) : [userAns];
                           const isCorrectOpt = correctKeys.includes(opt.key);
                           const isWrongOpt = userKeys.includes(opt.key) && !correctKeys.includes(opt.key);
