@@ -8,6 +8,8 @@ import ChoiceQuestion from '../components/ChoiceQuestion';
 import MultiChoiceQuestion from '../components/MultiChoiceQuestion';
 import JudgmentQuestion from '../components/JudgmentQuestion';
 import ExamSelector from '../components/ExamSelector';
+import BackHomeButton from '../components/BackHomeButton';
+import BackToTop from '../components/BackToTop';
 
 async function loadAllQuestions(subjectId, mode, sessionId) {
   let allQuestions = [];
@@ -201,14 +203,8 @@ export default function SubjectPage() {
               </section>
             )}
 
-            <div className="text-center py-8">
-              <button
-                onClick={() => navigate('/')}
-                className="px-8 py-3 bg-white border-2 border-gray-200 hover:border-indigo-400 hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 rounded-xl transition-all shadow-md"
-              >
-                返回首页
-              </button>
-            </div>
+            <BackHomeButton color="indigo" />
+            <BackToTop />
           </ExamProvider>
         )}
       </div>

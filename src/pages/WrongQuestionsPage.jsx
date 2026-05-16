@@ -6,6 +6,8 @@ import { ExamProvider } from '../contexts/ExamContext';
 import ChoiceQuestion from '../components/ChoiceQuestion';
 import MultiChoiceQuestion from '../components/MultiChoiceQuestion';
 import JudgmentQuestion from '../components/JudgmentQuestion';
+import BackHomeButton from '../components/BackHomeButton';
+import BackToTop from '../components/BackToTop';
 
 const TYPE_TAG = {
   choice: { label: '单选', cls: 'bg-blue-100 text-blue-700' },
@@ -337,6 +339,10 @@ export default function WrongQuestionsPage() {
                 )}
               </div>
             )}
+
+            {tab === 'list' && (
+              <BackHomeButton color="orange" />
+            )}
           </>
         )}
 
@@ -382,6 +388,8 @@ export default function WrongQuestionsPage() {
             </div>
           </ExamProvider>
         )}
+
+        <BackToTop />
       </div>
     </div>
   );

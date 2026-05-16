@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { get } from '../services/api';
 import MarkdownContent from '../components/MarkdownContent';
+import BackHomeButton from '../components/BackHomeButton';
+import BackToTop from '../components/BackToTop';
 
 const TYPE_LABELS = {
   study_guide: { label: '学习指南', bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
@@ -182,14 +184,8 @@ export default function MaterialsPage() {
           </div>
         )}
 
-        <div className="text-center py-8">
-          <button
-            onClick={() => navigate('/')}
-            className="px-8 py-3 bg-white border-2 border-gray-200 hover:border-teal-400 hover:bg-teal-50 text-gray-700 hover:text-teal-600 rounded-xl transition-all shadow-md"
-          >
-            返回首页
-          </button>
-        </div>
+        <BackHomeButton color="teal" />
+        <BackToTop />
       </div>
     </div>
   );
