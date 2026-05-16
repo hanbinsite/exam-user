@@ -3,11 +3,11 @@ import { useExam } from '../contexts/ExamContext';
 
 export default function MultiChoiceQuestion({ question, index }) {
   const { answers, setAnswer, mode, examSubmitted } = useExam();
-  const [confirmed, setConfirmed] = useState(mode === 'study');
   const selected = answers[String(question.id)];
   const selectedArr = Array.isArray(selected) ? selected : (selected ? [selected] : []);
   const isAnswered = selectedArr.length > 0;
   const showFeedback = mode !== 'exam' || examSubmitted;
+  const [confirmed, setConfirmed] = useState(mode === 'study' || (mode === 'practice' && isAnswered));
   const effectiveShowFeedback = showFeedback && confirmed;
   const answerArr = question.answer ? question.answer.split('') : [];
   const isCorrect = effectiveShowFeedback && isAnswered && selectedArr.length === answerArr.length && selectedArr.every(k => answerArr.includes(k));
@@ -35,7 +35,9 @@ export default function MultiChoiceQuestion({ question, index }) {
   };
 
   const handleToggle = (optionKey) => {
-    if (examSubmitted || confirmed) return;
+    if (examSubmitted) return;
+    if (mode !== 'practice' && confirmed) return;
+
     let next;
     if (isSelected(optionKey)) {
       next = selectedArr.filter(k => k !== optionKey);
@@ -44,6 +46,10 @@ export default function MultiChoiceQuestion({ question, index }) {
     }
     next.sort();
     setAnswer(question.id, next.length > 0 ? next : undefined);
+
+    if (mode === 'practice' && confirmed) {
+      setConfirmed(false);
+    }
   };
 
   return (

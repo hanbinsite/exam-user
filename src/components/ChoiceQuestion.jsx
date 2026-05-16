@@ -1,6 +1,6 @@
 import { useExam } from '../contexts/ExamContext';
 
-export default function ChoiceQuestion({ question, index }) {
+export default function ChoiceQuestion({ question, index, allowChange = false }) {
   const { answers, setAnswer, mode, examSubmitted } = useExam();
   const selected = answers[String(question.id)];
   const isAnswered = selected !== undefined;
@@ -28,8 +28,7 @@ export default function ChoiceQuestion({ question, index }) {
 
   const handleSelect = (optionKey) => {
     if (examSubmitted) return;
-    if (!isAnswered || mode === 'exam') {
-      if (mode !== 'exam' && isAnswered) return;
+    if (allowChange || !isAnswered || mode === 'exam') {
       setAnswer(question.id, optionKey);
     }
   };

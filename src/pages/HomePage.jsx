@@ -131,16 +131,25 @@ export default function HomePage() {
                   </div>
 
                   <div className="grid grid-cols-4 gap-3">
-                    {MODES.map((m) => (
+                    {MODES.map((m) => {
+                      const to = m.isLink
+                        ? `/materials/${subject.id}`
+                        : m.key === 'practice'
+                          ? `/practice/${subject.id}`
+                          : m.key === 'exam'
+                            ? `/exam/${subject.id}`
+                            : `/subject/${subject.id}?mode=${m.key}`;
+                      return (
                       <Link
                         key={m.key}
-                        to={m.isLink ? `/materials/${subject.id}` : `/subject/${subject.id}?mode=${m.key}`}
+                        to={to}
                         className={`flex items-center justify-center gap-2 py-3 rounded-xl border ${m.bg} ${m.text} font-medium hover:shadow-md transition-all`}
                       >
                         <span>{m.icon}</span>
                         <span>{m.label}</span>
                       </Link>
-                    ))}
+                    );
+                    })}
                   </div>
                 </div>
               </div>

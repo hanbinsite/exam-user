@@ -9,6 +9,9 @@ const SubjectPage = lazy(() => import('./pages/SubjectPage'));
 const WrongQuestionsPage = lazy(() => import('./pages/WrongQuestionsPage'));
 const MaterialsPage = lazy(() => import('./pages/MaterialsPage'));
 const ExamPage = lazy(() => import('./pages/ExamPage'));
+const PracticePage = lazy(() => import('./pages/PracticePage'));
+const PracticeResultPage = lazy(() => import('./pages/PracticeResultPage'));
+const ExamResultPage = lazy(() => import('./pages/ExamResultPage'));
 
 function PageLoader() {
   return (
@@ -30,6 +33,9 @@ function App() {
         <Route path="/wrong-questions/:subjectId" element={<ProtectedRoute><WrongQuestionsPage /></ProtectedRoute>} />
         <Route path="/materials/:subjectId" element={<ProtectedRoute><MaterialsPage /></ProtectedRoute>} />
         <Route path="/exam/:examId" element={<ProtectedRoute><ExamPage /></ProtectedRoute>} />
+        <Route path="/practice/:subjectId" element={<ProtectedRoute><PracticePage /></ProtectedRoute>} />
+        <Route path="/practice/:subjectId/result" element={<ProtectedRoute><PracticeResultPage /></ProtectedRoute>} />
+        <Route path="/exam/:subjectId/result" element={<ProtectedRoute><ExamResultPage /></ProtectedRoute>} />
       </Routes>
     </Suspense>
     </Router>

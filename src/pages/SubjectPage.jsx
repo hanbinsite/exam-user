@@ -7,18 +7,15 @@ import StatsCard from '../components/StatsCard';
 import ChoiceQuestion from '../components/ChoiceQuestion';
 import MultiChoiceQuestion from '../components/MultiChoiceQuestion';
 import JudgmentQuestion from '../components/JudgmentQuestion';
-import ExamSelector from '../components/ExamSelector';
 import BackHomeButton from '../components/BackHomeButton';
 import BackToTop from '../components/BackToTop';
 
-async function loadAllQuestions(subjectId, mode, sessionId) {
+async function loadAllQuestions(subjectId) {
   let allQuestions = [];
   let page = 1;
   const pageSize = 100;
   while (true) {
-    let params = `mode=${mode}&page=${page}&pageSize=${pageSize}`;
-    if (sessionId) params += `&session_id=${sessionId}`;
-    const res = await get(`/subjects/${subjectId}/questions?${params}`);
+    const res = await get(`/subjects/${subjectId}/questions?mode=study&page=${page}&pageSize=${pageSize}`);
     allQuestions = allQuestions.concat(res.questions || []);
     if (allQuestions.length >= res.total) break;
     page++;
@@ -35,16 +32,23 @@ export default function SubjectPage() {
   const [phase, setPhase] = useState('loading');
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState('');
-  const [subjectInfo, setSubjectInfo] = useState(null);
-  const [examSession, setExamSession] = useState(null);
 
-  const effectiveMode = examSession ? 'exam' : mode;
+  useEffect(() => {
+    if (mode === 'practice') {
+      navigate(`/practice/${subjectId}`, { replace: true });
+      return;
+    }
+    if (mode === 'exam') {
+      navigate(`/exam/${subjectId}`, { replace: true });
+      return;
+    }
+  }, [mode, subjectId, navigate]);
 
-  const fetchQuestions = useCallback(async (m, sessionId) => {
+  const fetchQuestions = useCallback(async () => {
     setPhase('loading');
     setError('');
     try {
-      const qs = await loadAllQuestions(subjectId, m, sessionId);
+      const qs = await loadAllQuestions(subjectId);
       setQuestions(qs);
       setPhase('ready');
     } catch (err) {
@@ -54,32 +58,17 @@ export default function SubjectPage() {
   }, [subjectId]);
 
   useEffect(() => {
-    if (mode === 'exam') {
-      setPhase('exam-select');
-    } else {
-      setExamSession(null);
-      fetchQuestions(mode);
-    }
+    if (mode === 'study') fetchQuestions();
   }, [subjectId, mode, fetchQuestions]);
-
-  useEffect(() => {
-    get(`/subjects/${subjectId}`)
-      .then(setSubjectInfo)
-      .catch(() => {});
-  }, [subjectId]);
-
-  const handleExamStart = useCallback(async (session) => {
-    setExamSession(session);
-    await fetchQuestions('exam', session.session_id);
-  }, [fetchQuestions]);
 
   const choiceQuestions = questions.filter(q => q.__type === 'choice');
   const multiChoiceQuestions = questions.filter(q => q.__type === 'multi_choice');
   const judgmentQuestions = questions.filter(q => q.__type === 'judgment');
 
+  if (mode !== 'study') return null;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
       <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white py-8 px-4 shadow-lg">
         <div className="max-w-4xl mx-auto">
           <button
@@ -91,40 +80,18 @@ export default function SubjectPage() {
             </svg>
             返回首页
           </button>
-          <h1 className="text-3xl font-bold mb-2">
-            {subjectInfo?.name || '加载中...'}
-          </h1>
-          <p className="text-white/80">
-            {mode === 'study' && '学习模式 · 答题后查看解析'}
-            {mode === 'practice' && '练习模式 · 自测检验'}
-            {mode === 'exam' && !examSession && '考试模式 · 请选择题库'}
-            {mode === 'exam' && examSession && `考试模式 · ${examSession.exam_config?.name || ''}`}
-          </p>
-          {examSession && (
-            <div className="flex gap-4 mt-3 text-sm text-white/70">
-              <span>共 {examSession.question_count} 题</span>
-              {examSession.expires_at && (
-                <span>截止: {new Date(examSession.expires_at).toLocaleString()}</span>
-              )}
-            </div>
-          )}
+          <h1 className="text-3xl font-bold mb-2">学习模式</h1>
+          <p className="text-white/80">答题后查看解析</p>
         </div>
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Exam selection phase */}
-        {phase === 'exam-select' && (
-          <ExamSelector subjectId={subjectId} onStart={handleExamStart} />
-        )}
-
-        {/* Loading */}
         {phase === 'loading' && (
           <div className="flex items-center justify-center py-16">
             <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
           </div>
         )}
 
-        {/* Error */}
         {phase === 'error' && (
           <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -134,7 +101,7 @@ export default function SubjectPage() {
             </div>
             <p className="text-red-600 mb-4">{error}</p>
             <button
-              onClick={() => fetchQuestions(effectiveMode, examSession?.session_id)}
+              onClick={fetchQuestions}
               className="px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl hover:from-indigo-600 hover:to-purple-700 transition-all"
             >
               重试
@@ -142,15 +109,9 @@ export default function SubjectPage() {
           </div>
         )}
 
-        {/* Questions */}
         {phase === 'ready' && (
-          <ExamProvider
-            questions={questions}
-            mode={effectiveMode}
-            subjectId={subjectId}
-            examSessionId={examSession?.session_id}
-          >
-            {effectiveMode !== 'study' && <StatsCard />}
+          <ExamProvider questions={questions} mode="study" subjectId={subjectId}>
+            <StatsCard />
 
             {choiceQuestions.length > 0 && (
               <section className="mb-8">

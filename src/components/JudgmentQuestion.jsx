@@ -1,6 +1,6 @@
 import { useExam } from '../contexts/ExamContext';
 
-export default function JudgmentQuestion({ question, index }) {
+export default function JudgmentQuestion({ question, index, allowChange = false }) {
   const { answers, setAnswer, mode, examSubmitted } = useExam();
   const selected = answers[String(question.id)];
   const isAnswered = selected !== undefined;
@@ -34,6 +34,13 @@ export default function JudgmentQuestion({ question, index }) {
     return 'border-gray-200 opacity-50 bg-gray-50';
   };
 
+  const handleSelect = (value) => {
+    if (examSubmitted) return;
+    if (allowChange || !isAnswered || mode === 'exam') {
+      setAnswer(question.id, value);
+    }
+  };
+
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 mb-4 border border-gray-100 transition-all hover:shadow-xl hover:-translate-y-0.5">
       <div className="flex items-start gap-4 mb-5">
@@ -45,12 +52,7 @@ export default function JudgmentQuestion({ question, index }) {
 
       <div className="flex gap-4 ml-14">
         <button
-          onClick={() => {
-            if (examSubmitted) return;
-            if (mode !== 'exam' && isAnswered) return;
-            setAnswer(question.id, true);
-          }}
-          disabled={isAnswered && showFeedback}
+          onClick={() => handleSelect(true)}
           className={`flex-1 py-4 px-6 rounded-xl border-2 font-semibold transition-all flex items-center justify-center gap-3 ${getButtonClass(true)}`}
         >
           <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
@@ -76,12 +78,7 @@ export default function JudgmentQuestion({ question, index }) {
         </button>
 
         <button
-          onClick={() => {
-            if (examSubmitted) return;
-            if (mode !== 'exam' && isAnswered) return;
-            setAnswer(question.id, false);
-          }}
-          disabled={isAnswered && showFeedback}
+          onClick={() => handleSelect(false)}
           className={`flex-1 py-4 px-6 rounded-xl border-2 font-semibold transition-all flex items-center justify-center gap-3 ${getButtonClass(false)}`}
         >
           <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
